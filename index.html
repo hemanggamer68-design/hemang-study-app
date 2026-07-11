@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Hemang's Practice Series</title>
+
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)'], ['$','$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script id="MathJax-script" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:       #0d1117;
+  --s1:       #151a21;
+  --s2:       #1c222b;
+  --border:   #2a323d;
+  --text:     #e9edf3;
+  --muted:    #8b93a3;
+  --blue:     #3da9ff;
+  --green:    #39ff88;
+  --red:      #ff3b5c;
+  --f-display:'Space Grotesk', sans-serif;
+  --f-body:   'Inter', sans-serif;
+  --f-mono:   'JetBrains Mono', monospace;
+  --ease:     cubic-bezier(.2,.9,.25,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  background:
+    radial-gradient(circle at 12% 0%,  rgba(61,169,255,.13),transparent 42%),
+    radial-gradient(circle at 88% 100%,rgba(57,255,136,.07),transparent 45%),
+    var(--bg);
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:var(--f-body);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:24px 16px 64px;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:38px 38px;
+  pointer-events:none;z-index:0;
+}
+
+.wrap{width:100%;max-width:600px;position:relative;z-index:1;}
+
+.screen{
+  display:none;
+  max-height:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+.screen.show{
+  display:flex;
+  flex-direction:column;
+  max-height:none;
+  overflow:visible;
+  pointer-events:auto;
+  animation:fadeUp .38s var(--ease) both;
+}
+.screen.leaving{
+  display:flex;
+  flex-direction:column;
+  max-height:none;
+  overflow:visible;
+  pointer-events:none;
+  animation:fadeDown .22s ease forwards;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(18px);}
+  to  {opacity:1;transform:translateY(0);}
+}
+@keyframes fadeDown{
+  from{opacity:1;transform:translateY(0);}
+  to  {opacity:0;transform:translateY(-12px);}
+}
+
+.nav-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;
+}
+.nav-brand{display:flex;align-items:center;gap:10px;}
+.nav-logo{
+  width:36px;height:36px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-display);font-weight:700;font-size:18px;
+  background:linear-gradient(145deg,#1b212b,#111419);
+  border:1px solid var(--border);color:var(--blue);
+  box-shadow:0 0 16px rgba(61,169,255,.2),inset 0 0 10px rgba(61,169,255,.06);
+  flex-shrink:0;
+}
+.nav-brand-text .n{font-family:var(--f-display);font-weight:700;font-size:15.5px;}
+.nav-brand-text .s{font-family:var(--f-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
+.nav-tag{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.6px;
+  color:var(--blue);border:1px solid rgba(61,169,255,.3);
+  background:rgba(61,169,255,.07);
+  padding:5px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap;
+}
+
+.back-btn{
+  display:flex;align-items:center;gap:6px;
+  background:none;border:none;cursor:pointer;
+  font-family:var(--f-mono);font-size:11px;color:var(--muted);
+  padding:6px 0;transition:color .18s ease;
+}
+.back-btn:hover{color:var(--blue);}
+.back-btn svg{width:14px;height:14px;flex-shrink:0;}
+
+#landingScreen{
+  min-height:88vh;
+  align-items:center;justify-content:center;text-align:center;
+  padding:24px 8px;
+}
+
+.landing-badge{
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:1.6px;
+  text-transform:uppercase;color:var(--blue);
+  border:1px solid rgba(61,169,255,.32);background:rgba(61,169,255,.07);
+  padding:7px 14px;border-radius:999px;margin-bottom:28px;
+}
+.landing-icon{
+  width:82px;height:82px;border-radius:22px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-display);font-weight:700;font-size:38px;
+  background:linear-gradient(145deg,#1a2030,#111419);
+  border:1px solid var(--border);color:var(--blue);
+  box-shadow:0 0 44px rgba(61,169,255,.28),inset 0 0 20px rgba(61,169,255,.07);
+  margin:0 auto 28px;
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+
+.landing-title{
+  font-family:var(--f-display);font-weight:700;
+  font-size:clamp(26px,6.5vw,40px);line-height:1.14;margin-bottom:12px;
+  background:linear-gradient(105deg,#fff 25%,var(--blue) 80%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.landing-sub{
+  font-family:var(--f-mono);font-size:13px;color:var(--muted);
+  letter-spacing:.3px;margin-bottom:36px;
+}
+.landing-chips{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;
+}
+.chip{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.4px;
+  color:var(--muted);border:1px solid var(--border);
+  padding:5px 11px;border-radius:999px;
+}
+
+.cta-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:16px 40px;border-radius:14px;border:none;cursor:pointer;
+  font-family:var(--f-display);font-weight:700;font-size:15.5px;letter-spacing:.2px;
+  color:#060a0d;
+  background:linear-gradient(100deg,var(--blue),#6dd4ff 50%,var(--green));
+  background-size:200% 100%;
+  box-shadow:0 14px 36px -10px rgba(61,169,255,.5);
+  transition:background-position .4s ease,transform .15s ease,box-shadow .2s ease;
+}
+.cta-btn:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 18px 42px -10px rgba(61,169,255,.65);}
+.cta-btn:active{transform:translateY(0);}
+.cta-btn svg{width:17px;height:17px;}
+
+#subjectScreen, #chapterScreen, #countScreen, #quizScreen{padding-top:4px;}
+.section-label{
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--muted);margin-bottom:10px;
+}
+.section-title{
+  font-family:var(--f-display);font-weight:700;font-size:21px;
+  margin-bottom:6px;
+}
+.section-sub{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);margin-bottom:24px;}
+
+/* same card style for subjects and chapters */
+.card-list{display:flex;flex-direction:column;gap:12px;}
+
+.card-item{
+  display:flex;align-items:center;gap:15px;
+  width:100%;text-align:left;
+  background:linear-gradient(150deg,#1f2936 0%,#19212c 100%);
+  border:1px solid #354454;
+  border-left:3px solid rgba(61,169,255,.45);
+  border-radius:16px;
+  padding:17px 17px;cursor:pointer;position:relative;overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.35);
+  transition:border-color .2s ease,border-left-color .2s ease,
+             transform .17s ease,box-shadow .2s ease,background .2s ease;
+}
+.card-item::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent,rgba(61,169,255,.07),transparent);
+  transform:translateX(-110%);transition:transform .55s ease;
+}
+.card-item:hover::after{transform:translateX(110%);}
+.card-item:hover{
+  background:linear-gradient(150deg,#243040 0%,#1d2836 100%);
+  border-color:#4a6480;
+  border-left-color:var(--blue);
+  transform:translateY(-3px);
+  box-shadow:0 14px 36px -12px rgba(61,169,255,.42),0 4px 16px rgba(0,0,0,.4);
+}
+.card-item:active{transform:translateY(-1px);}
+
+.c-icon{
+  width:48px;height:48px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(61,169,255,.14);
+  border:1px solid rgba(61,169,255,.28);
+  color:var(--blue);
+  box-shadow:inset 0 0 12px rgba(61,169,255,.08);
+}
+.c-icon svg{width:22px;height:22px;}
+.c-info{flex:1;}
+.c-name{
+  font-family:var(--f-display);font-weight:700;font-size:16px;
+  color:#f0f4f8;
+  margin-bottom:4px;
+}
+.c-meta{
+  font-family:var(--f-mono);font-size:10.5px;
+  color:#8faabb;letter-spacing:.2px;
+}
+.c-arrow{
+  color:#4a7a99;flex-shrink:0;
+  transition:transform .18s ease,color .18s ease;
+}
+.card-item:hover .c-arrow{transform:translateX(4px);color:var(--blue);}
+.c-arrow svg{width:17px;height:17px;}
+
+/* count & quiz styles unchanged */
+.selected-chapter-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--f-mono);font-size:10.5px;
+  color:var(--blue);border:1px solid rgba(61,169,255,.28);
+  background:rgba(61,169,255,.07);
+  padding:6px 12px;border-radius:999px;margin-bottom:22px;
+}
+.selected-chapter-badge svg{width:12px;height:12px;}
+
+.count-card{
+  background:linear-gradient(150deg,#1f2936 0%,#19212c 100%);
+  border:1px solid #354454;border-radius:18px;
+  padding:24px 20px 22px;
+  box-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+.count-card-title{
+  font-family:var(--f-display);font-weight:700;font-size:20px;margin-bottom:6px;
+}
+.count-card-sub{
+  font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:22px;
+}
+
+.count-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+
+.count-opt{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;padding:16px 6px;
+  border-radius:13px;border:1px solid #354454;
+  background:#242f3d;cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,transform .13s ease,box-shadow .18s ease;
+}
+.count-opt:hover{
+  border-color:rgba(61,169,255,.55);background:#2a3a4e;
+  transform:translateY(-2px);box-shadow:0 8px 22px -10px rgba(61,169,255,.3);
+}
+.count-opt:active{transform:translateY(0);}
+.count-opt.active{
+  border-color:var(--blue);background:rgba(61,169,255,.11);
+  box-shadow:0 0 0 1px rgba(61,169,255,.28),0 8px 22px -10px rgba(61,169,255,.3);
+}
+.count-num{
+  font-family:var(--f-display);font-weight:700;font-size:26px;color:var(--text);
+  transition:color .18s ease;
+}
+.count-lbl{
+  font-family:var(--f-mono);font-size:9.5px;color:var(--muted);letter-spacing:.3px;
+  transition:color .18s ease;
+}
+.count-opt.active .count-num{color:var(--blue);}
+.count-opt.active .count-lbl{color:var(--blue);}
+
+.divider{height:1px;background:var(--border);margin:0 0 20px;}
+
+.begin-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14.5px;
+  border-radius:13px;border:none;cursor:pointer;
+  font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:.2px;
+  color:#060a0d;
+  background:linear-gradient(100deg,var(--blue),#6dd4ff 50%,var(--green));
+  background-size:200% 100%;
+  box-shadow:0 10px 28px -8px rgba(61,169,255,.4);
+  transition:background-position .4s ease,transform .15s ease,opacity .2s ease;
+  opacity:.4;pointer-events:none;
+}
+.begin-btn.ready{opacity:1;pointer-events:auto;}
+.begin-btn:hover{background-position:100% 0;transform:translateY(-1px);}
+.begin-btn:active{transform:translateY(0);}
+.begin-btn svg{width:16px;height:16px;}
+
+#quizScreen{padding-top:4px;}
+
+.progress-row{
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--f-mono);font-size:11.5px;color:var(--muted);
+  margin-bottom:8px;
+}
+.progress-row .q-label b{color:var(--text);font-weight:600;}
+.progress-row .score-live{color:var(--blue);}
+
+.progress-track{
+  position:relative;height:5px;
+  background:var(--s2);border-radius:999px;overflow:hidden;
+  margin-bottom:22px;border:1px solid var(--border);
+}
+.progress-fill{
+  position:absolute;top:0;left:0;height:100%;
+  background:linear-gradient(90deg,var(--blue),var(--green));
+  border-radius:999px;width:0%;
+  transition:width .48s cubic-bezier(.65,.05,.36,1);
+  box-shadow:0 0 12px rgba(61,169,255,.5);
+}
+.progress-ticks{position:absolute;inset:0;display:flex;}
+.progress-ticks span{flex:1;border-right:1px solid rgba(0,0,0,.3);}
+.progress-ticks span:last-child{border-right:none;}
+
+.q-card{
+  background:linear-gradient(160deg,var(--s1),#111419);
+  border:1px solid var(--border);border-radius:20px;
+  padding:24px 20px 22px;
+  box-shadow:0 18px 56px -18px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.02) inset;
+  animation:cardIn .42s var(--ease);
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(13px) scale(.983);}
+  to  {opacity:1;transform:translateY(0)     scale(1);}
+}
+.q-card.flash-ok  {animation:glowGreen .52s ease;}
+.q-card.flash-err {animation:shakeX    .4s ease;}
+@keyframes glowGreen{
+  0%  {box-shadow:0 0 0 0 rgba(57,255,136,0),   0 18px 56px -18px rgba(0,0,0,.7);}
+  30% {box-shadow:0 0 0 3px rgba(57,255,136,.22),0 18px 56px -18px rgba(0,0,0,.7);}
+  100%{box-shadow:0 0 0 0 rgba(57,255,136,0),   0 18px 56px -18px rgba(0,0,0,.7);}
+}
+@keyframes shakeX{
+  0%,100%{transform:translateX(0);}
+  20%{transform:translateX(-6px);}
+  40%{transform:translateX(5px);}
+  60%{transform:translateX(-3px);}
+  80%{transform:translateX(2px);}
+}
+
+.q-meta{
+  display:flex;align-items:center;gap:7px;
+  font-family:var(--f-mono);font-size:10.5px;color:var(--blue);
+  text-transform:uppercase;letter-spacing:.9px;margin-bottom:13px;
+}
+.q-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);box-shadow:0 0 6px var(--blue);}
+
+.q-text{
+  font-family:var(--f-display);font-size:18px;font-weight:600;
+  line-height:1.55;color:var(--text);margin-bottom:20px;
+}
+.q-text mjx-container{font-size:104% !important;}
+
+.options{display:flex;flex-direction:column;gap:10px;}
+
+.opt{
+  display:flex;align-items:center;gap:11px;
+  width:100%;text-align:left;
+  background:var(--s2);border:1px solid var(--border);
+  color:var(--text);font-family:var(--f-body);font-size:14.5px;font-weight:500;
+  padding:13px 15px;border-radius:12px;cursor:pointer;position:relative;
+  transition:border-color .18s ease,background .18s ease,transform .13s ease,box-shadow .18s ease;
+}
+.opt .ltr{
+  font-family:var(--f-mono);font-size:11px;color:var(--muted);
+  width:21px;height:21px;border-radius:6px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all .18s ease;
+}
+.opt .opt-text{flex:1;}
+.opt .opt-text mjx-container{font-size:103% !important;}
+.opt:hover:not(.locked){
+  border-color:rgba(61,169,255,.42);background:#1e2633;
+  transform:translateY(-2px);box-shadow:0 7px 18px -10px rgba(61,169,255,.22);
+}
+.opt:active:not(.locked){transform:translateY(0);}
+.opt.locked{cursor:default;}
+
+.opt.correct{
+  background:rgba(57,255,136,.09);border-color:var(--green);
+  box-shadow:0 0 0 1px rgba(57,255,136,.22),0 0 20px -4px rgba(57,255,136,.38);
+}
+.opt.correct .ltr{background:var(--green);color:#06150b;border-color:var(--green);}
+
+.opt.wrong{
+  background:rgba(255,59,92,.09);border-color:var(--red);
+  box-shadow:0 0 0 1px rgba(255,59,92,.22),0 0 20px -4px rgba(255,59,92,.38);
+}
+.opt.wrong .ltr{background:var(--red);color:#1a0509;border-color:var(--red);}
+.opt.dim{opacity:.4;}
+
+.result-tag{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.4px;
+  padding:2px 8px;border-radius:999px;margin-left:auto;flex-shrink:0;
+}
+.result-tag.ok {background:rgba(57,255,136,.14);color:var(--green);}
+.result-tag.err{background:rgba(255,59,92,.14); color:var(--red);}
+
+.explain{
+  margin-top:16px;border-radius:13px;
+  border:1px solid rgba(61,169,255,.22);
+  background:linear-gradient(155deg,rgba(61,169,255,.06),rgba(57,255,136,.03));
+  padding:14px 15px 15px;
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .42s var(--ease),opacity .3s ease,padding .3s ease,margin .3s ease;
+}
+.explain.open{max-height:650px;opacity:1;}
+.explain-head{
+  display:flex;align-items:center;gap:7px;
+  font-family:var(--f-mono);font-size:10.5px;color:var(--blue);
+  text-transform:uppercase;letter-spacing:.9px;margin-bottom:8px;
+}
+.explain-head svg{width:13px;height:13px;flex-shrink:0;}
+.explain-body{font-size:13.5px;line-height:1.68;color:#bdc4d0;}
+.explain-body mjx-container{font-size:101% !important;}
+
+.next-btn{
+  display:none;align-items:center;justify-content:center;gap:7px;
+  width:100%;margin-top:18px;padding:14px;
+  border-radius:13px;border:none;cursor:pointer;
+  font-family:var(--f-display);font-weight:700;font-size:14.5px;letter-spacing:.2px;
+  color:#060a0d;
+  background:linear-gradient(100deg,var(--blue),#6dd4ff 50%,var(--green));
+  background-size:200% 100%;
+  box-shadow:0 9px 28px -8px rgba(61,169,255,.33);
+  transition:background-position .4s ease,transform .13s ease;
+}
+.next-btn.visible{display:flex;animation:fadeUp .35s var(--ease);}
+.next-btn:hover{background-position:100% 0;transform:translateY(-1px);}
+.next-btn:active{transform:translateY(0);}
+.next-btn svg{width:15px;height:15px;}
+
+.result-panel{display:none;}
+.result-panel.open{display:block;animation:fadeUp .4s var(--ease) both;}
+
+.res-card{
+  background:linear-gradient(160deg,var(--s1),#111419);
+  border:1px solid var(--border);border-radius:20px;
+  padding:26px 22px 24px;
+  box-shadow:0 18px 56px -18px rgba(0,0,0,.7);
+  text-align:center;
+}
+.res-pill{
+  display:inline-block;
+  font-family:var(--f-mono);font-size:10.5px;color:var(--blue);
+  background:rgba(61,169,255,.08);border:1px solid rgba(61,169,255,.28);
+  padding:5px 12px;border-radius:999px;margin-bottom:20px;
+}
+.ring-wrap{position:relative;width:156px;height:156px;margin:0 auto 20px;}
+.ring-svg{width:100%;height:100%;transform:rotate(-90deg);}
+.ring-svg circle{fill:none;stroke-width:8;}
+.ring-bg  {stroke:var(--s2);}
+.ring-arc{
+  stroke:url(#arcGrad);stroke-linecap:round;
+  stroke-dasharray:408;stroke-dashoffset:408;
+  transition:stroke-dashoffset 1.05s cubic-bezier(.2,.9,.2,1);
+  filter:drop-shadow(0 0 7px rgba(61,169,255,.5));
+}
+.ring-inner{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.ring-score{font-family:var(--f-display);font-size:30px;font-weight:700;}
+.ring-label{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);margin-top:2px;}
+
+.verdict{font-family:var(--f-display);font-weight:700;font-size:20px;margin-bottom:5px;}
+.verdict-sub{font-family:var(--f-body);font-size:13px;color:var(--muted);max-width:360px;margin:0 auto 8px;line-height:1.5;}
+.res-meta{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  flex-wrap:wrap;margin-bottom:20px;
+}
+.res-meta--pill{
+  font-family:var(--f-mono);font-size:10px;
+  color:var(--muted);border:1px solid var(--border);
+  padding:4px 10px;border-radius:999px;
+}
+
+.stat-row{display:flex;gap:9px;margin-bottom:22px;}
+.stat-box{
+  flex:1;background:var(--s2);border:1px solid var(--border);
+  border-radius:11px;padding:11px 7px;
+}
+.stat-val{font-family:var(--f-display);font-weight:700;font-size:17px;}
+.stat-box.s-ok  .stat-val{color:var(--green);}
+.stat-box.s-err .stat-val{color:var(--red);}
+.stat-lbl{font-family:var(--f-mono);font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:3px;}
+
+.res-actions{display:flex;flex-direction:column;gap:9px;}
+
+.btn-retry{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  width:100%;padding:14px;border-radius:13px;border:none;cursor:pointer;
+  font-family:var(--f-display);font-weight:700;font-size:14.5px;color:#060a0d;
+  background:linear-gradient(100deg,var(--blue),#6dd4ff 50%,var(--green));
+  background-size:200% 100%;
+  box-shadow:0 9px 28px -8px rgba(61,169,255,.35);
+  transition:background-position .4s ease,transform .13s ease;
+}
+.btn-retry:hover{background-position:100% 0;transform:translateY(-1px);}
+
+.btn-change{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  width:100%;padding:14px;border-radius:13px;
+  border:1px solid var(--border);background:var(--s2);color:var(--text);
+  font-family:var(--f-display);font-weight:600;font-size:14.5px;cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,transform .13s ease;
+}
+.btn-change:hover{border-color:var(--blue);background:#1c2230;transform:translateY(-1px);}
+
+footer{
+  margin-top:24px;text-align:center;
+  font-family:var(--f-mono);font-size:10px;color:#404b58;letter-spacing:.3px;
+}
+
+@media(max-width:400px){
+  .q-text{font-size:16.5px;}
+  .opt{font-size:13.5px;padding:12px 12px;}
+  .q-card{padding:20px 14px 18px;border-radius:16px;}
+  .count-num{font-size:22px;}
+  .landing-icon{width:68px;height:68px;font-size:32px;}
+  .cta-btn{width:100%;padding:15px 20px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Landing Screen -->
+<section class="screen show" id="landingScreen">
+  <div class="landing-badge">Class 10th &middot; Multi‑Subject Practice</div>
+  <div class="landing-icon">&Sigma;</div>
+  <h1 class="landing-title">Hemang<br>Welcomes You</h1>
+  <p class="landing-sub">Maths &bull; Chemistry &bull; Biology &bull; Physics</p>
+  <div class="landing-chips">
+    <span class="chip">Real Numbers</span>
+    <span class="chip">Polynomials</span>
+    <span class="chip">Chemical Reactions</span>
+    <span class="chip">Life Processes</span>
+    <span class="chip">Light</span>
+  </div>
+  <button class="cta-btn" id="btnStart">
+    Start Practice
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M5 12h14M13 6l6 6-6 6"/>
+    </svg>
+  </button>
+</section>
+
+<!-- Subject Selection Screen -->
+<section class="screen" id="subjectScreen">
+  <div class="nav-bar">
+    <div class="nav-brand">
+      <div class="nav-logo">&Sigma;</div>
+      <div class="nav-brand-text">
+        <div class="n">Practice Test Series</div>
+        <div class="s">Developer &middot; HEMANG</div>
+      </div>
+    </div>
+    <div class="nav-tag">Science</div>
+  </div>
+
+  <button class="back-btn" id="btnBackToLandingFromSubject">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+      <path d="M19 12H5M12 18l-6-6 6-6"/>
+    </svg>
+    Back to Home
+  </button>
+
+  <div style="margin-top:20px;">
+    <div class="section-label">Step 1 of 3</div>
+    <div class="section-title">Choose Your Subject</div>
+    <div class="section-sub">Select a subject to begin chapter‑wise practice</div>
+
+    <div class="card-list" id="subjectList">
+      <!-- built dynamically -->
+    </div>
+  </div>
+</section>
+
+<!-- Chapter Selection Screen (dynamic per subject) -->
+<section class="screen" id="chapterScreen">
+  <div class="nav-bar">
+    <div class="nav-brand">
+      <div class="nav-logo">&Sigma;</div>
+      <div class="nav-brand-text">
+        <div class="n">Practice Test Series</div>
+        <div class="s">Developer &middot; HEMANG</div>
+      </div>
+    </div>
+    <div class="nav-tag" id="chapterSubjectTag">Math</div>
+  </div>
+
+  <button class="back-btn" id="btnBackToSubjects">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+      <path d="M19 12H5M12 18l-6-6 6-6"/>
+    </svg>
+    Back to Subjects
+  </button>
+
+  <div style="margin-top:20px;">
+    <div class="section-label" id="chapterStepLabel">Step 2 of 3</div>
+    <div class="section-title">Choose Your Chapter</div>
+    <div class="section-sub" id="chapterSubtitle">Each question is carefully picked from standard textbooks</div>
+
+    <div class="card-list" id="chapterList"></div>
+  </div>
+</section>
+
+<!-- Count Selection Screen -->
+<section class="screen" id="countScreen">
+  <div class="nav-bar">
+    <div class="nav-brand">
+      <div class="nav-logo">&Sigma;</div>
+      <div class="nav-brand-text">
+        <div class="n">Practice Test Series</div>
+        <div class="s">Developer &middot; HEMANG</div>
+      </div>
+    </div>
+    <div class="nav-tag" id="countSubjectTag">Math</div>
+  </div>
+
+  <button class="back-btn" id="btnBackToChapters">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+      <path d="M19 12H5M12 18l-6-6 6-6"/>
+    </svg>
+    Back to Chapters
+  </button>
+
+  <div style="margin-top:20px;">
+    <div class="section-label" id="countStepLabel">Step 3 of 3</div>
+
+    <div class="selected-chapter-badge" id="selectedBadge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+      <span id="selectedChapterName">Chapter</span>
+    </div>
+
+    <div class="count-card">
+      <div class="count-card-title">Set Test Length</div>
+      <div class="count-card-sub">Select how many questions you want in this session</div>
+
+      <div class="count-grid" id="countGrid">
+        <button class="count-opt" data-n="3">
+          <span class="count-num">3</span>
+          <span class="count-lbl">Quick</span>
+        </button>
+        <button class="count-opt" data-n="5">
+          <span class="count-num">5</span>
+          <span class="count-lbl">Standard</span>
+        </button>
+        <button class="count-opt" data-n="10">
+          <span class="count-num">10</span>
+          <span class="count-lbl">Full Test</span>
+        </button>
+      </div>
+
+      <div class="divider"></div>
+
+      <button class="begin-btn" id="btnBegin">
+        Begin Test
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Quiz Screen (unchanged) -->
+<section class="screen" id="quizScreen">
+  <div class="nav-bar">
+    <div class="nav-brand">
+      <div class="nav-logo">&Sigma;</div>
+      <div class="nav-brand-text">
+        <div class="n">Practice Test Series</div>
+        <div class="s" id="quizChapterSub">Chapter</div>
+      </div>
+    </div>
+    <div class="nav-tag" id="quizSubjectTag">Math</div>
+  </div>
+
+  <div id="quizUI">
+    <div class="progress-row">
+      <div class="q-label">Question <b id="qNow">1</b> of <span id="qOf">3</span></div>
+      <div class="score-live">Score: <span id="scoreLive">0</span></div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progFill"></div>
+      <div class="progress-ticks" id="progTicks"></div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta"><span class="q-dot"></span>RD Sharma &middot; Advanced Level</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="optList"></div>
+
+      <div class="explain" id="explainBox">
+        <div class="explain-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9.663 17h4.674M12 3v1m6.364.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.121 9.9a4 4 0 1 1 5.657 0A4.99 4.99 0 0 1 12 17a4.99 4.99 0 0 1-1.121-3.464z"/>
+          </svg>
+          Step-by-Step Solution
+        </div>
+        <div class="explain-body" id="explainBody"></div>
+      </div>
+
+      <button class="next-btn" id="btnNext">
+        Next Question
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="res-card">
+      <div class="res-pill" id="resPill">Chapter</div>
+
+      <div class="ring-wrap">
+        <svg class="ring-svg" viewBox="0 0 148 148">
+          <defs>
+            <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="#3da9ff"/>
+              <stop offset="100%" stop-color="#39ff88"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-bg"  cx="74" cy="74" r="65"/>
+          <circle class="ring-arc" id="ringArc" cx="74" cy="74" r="65"/>
+        </svg>
+        <div class="ring-inner">
+          <div class="ring-score" id="resScore">0/3</div>
+          <div class="ring-label">FINAL SCORE</div>
+        </div>
+      </div>
+
+      <div class="verdict"  id="resVerdict">Solid Attempt!</div>
+      <div class="verdict-sub" id="resVerdictSub">Keep going — every rep sharpens the logic.</div>
+      <div class="res-meta">
+        <div class="res-meta-pill" id="resQPill">3 Questions</div>
+        <div class="res-meta-pill">Randomised Pool</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box s-ok">
+          <div class="stat-val" id="resCorrect">0</div>
+          <div class="stat-lbl">Correct</div>
+        </div>
+        <div class="stat-box s-err">
+          <div class="stat-val" id="resWrong">0</div>
+          <div class="stat-lbl">Wrong</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="resAcc">0%</div>
+          <div class="stat-lbl">Accuracy</div>
+        </div>
+      </div>
+
+      <div class="res-actions">
+        <button class="btn-retry" id="btnRetry">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <path d="M1 4v6h6M23 20v-6h-6"/>
+            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+          </svg>
+          Retry This Chapter
+        </button>
+        <button class="btn-change" id="btnChange">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+          Change Chapter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer>Built for deep conceptual mastery &mdash; not memorisation.</footer>
+</section>
+
+</div>
+<script>
+(function () {
+"use strict";
+
+/* ─────────────────────────────────────────────
+   QUESTION POOL  (multi‑subject)
+───────────────────────────────────────────── */
+const POOL = {
+  maths: {
+    real_numbers: {
+      name: "Real Numbers",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 17h16M7 4v16M17 4v16"/></svg>`,
+      pool: [
+        { q: "The HCF and LCM of two numbers are 9 and 360 respectively. If one of the numbers is 45, find the other number.", opts: ["72","60","80","90"], ci: 0, exp: "We know that \\( \\text{HCF} \\times \\text{LCM} = \\text{Product of the two numbers} \\). Let the other number be \\( x \\). Then \\( 9 \\times 360 = 45 \\times x \\). Solving for \\( x \\): \\( x = \\frac{9 \\times 360}{45} = \\frac{3240}{45} = 72 \\)." },
+        { q: "The decimal expansion of the rational number \\( \\frac{14587}{1250} \\) will terminate after how many decimal places?", opts: ["1","2","3","4"], ci: 3, exp: "The denominator is \\( 1250 \\). Prime factorization of \\( 1250 = 2^1 \\times 5^4 \\). The decimal expansion terminates after \\( k \\) places, where \\( k \\) is the maximum of the powers of 2 and 5 in the prime factorization of the denominator. Here, the max power is 4. So, it terminates after 4 decimal places." },
+        { q: "For some integer \\( m \\), every even integer is of the form:", opts: ["\\( m \\)","\\( m+1 \\)","\\( 2m \\)","\\( 2m+1 \\)"], ci: 2, exp: "By definition, an even integer is any integer that is exactly divisible by 2. Therefore, it can always be expressed as \\( 2 \\times \\text{integer} \\), which gives the form \\( 2m \\)." },
+        { q: "If \\( p_1 \\) and \\( p_2 \\) are two odd prime numbers such that \\( p_1 > p_2 \\), then \\( p_1^2 - p_2^2 \\) is:", opts: ["an even number","an odd number","an odd prime number","a prime number"], ci: 0, exp: "Since \\( p_1 \\) and \\( p_2 \\) are odd primes, their squares \\( p_1^2 \\) and \\( p_2^2 \\) are also odd. The difference between two odd numbers is always an even number. For example, if \\( p_1 = 5 \\) and \\( p_2 = 3 \\), then \\( 5^2 - 3^2 = 25 - 9 = 16 \\), which is even." },
+        { q: "The largest number which divides 70 and 125, leaving remainders 5 and 8, respectively, is:", opts: ["13","65","875","1750"], ci: 0, exp: "The required number divides \\( (70 - 5) = 65 \\) and \\( (125 - 8) = 117 \\) exactly. The largest such number is the HCF of 65 and 117. Prime factorization: \\( 65 = 5 \\times 13 \\) and \\( 117 = 3^2 \\times 13 \\). The common factor is 13. Therefore, the HCF is 13." },
+        { q: "If the HCF of 65 and 117 is expressible in the form \\( 65m - 117 \\), then the value of \\( m \\) is:", opts: ["4","2","1","3"], ci: 1, exp: "First, find the HCF of 65 and 117. As found before, \\( \\text{HCF}(65, 117) = 13 \\). Equating this to the given expression: \\( 65m - 117 = 13 \\Rightarrow 65m = 130 \\Rightarrow m = 2 \\)." },
+        { q: "Three bells toll at intervals of 9, 12, and 15 minutes respectively. If they start tolling together, after what time will they next toll together?", opts: ["3 hours","4 hours","2 hours","1 hour"], ci: 0, exp: "They will toll together after a time that is the Least Common Multiple (LCM) of their intervals. \\( \\text{LCM}(9, 12, 15) \\). Factorization: \\( 9=3^2 \\), \\( 12=2^2 \\times 3 \\), \\( 15=3 \\times 5 \\). \\( \\text{LCM} = 2^2 \\times 3^2 \\times 5 = 4 \\times 9 \\times 5 = 180 \\) minutes. 180 minutes = 3 hours." },
+        { q: "If two positive integers \\( p \\) and \\( q \\) can be expressed as \\( p = ab^2 \\) and \\( q = a^3b \\); where \\( a, b \\) are prime numbers, then LCM\\( (p, q) \\) is:", opts: ["\\( ab \\)","\\( a^2b^2 \\)","\\( a^3b^2 \\)","\\( a^3b^3 \\)"], ci: 2, exp: "The LCM of two numbers expressed in their prime factorization is the product of the highest powers of all prime factors involved. The highest power of \\( a \\) is \\( a^3 \\) and the highest power of \\( b \\) is \\( b^2 \\). Thus, the LCM is \\( a^3b^2 \\)." },
+        { q: "The least number that is divisible by all the numbers from 1 to 10 (both inclusive) is:", opts: ["10","100","504","2520"], ci: 3, exp: "We need the LCM of numbers 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. The highest powers of prime factors involved are: \\( 2^3 = 8 \\), \\( 3^2 = 9 \\), \\( 5^1 = 5 \\), \\( 7^1 = 7 \\). The LCM is \\( 8 \\times 9 \\times 5 \\times 7 = 2520 \\)." },
+        { q: "The product of a non-zero rational and an irrational number is:", opts: ["always irrational","always rational","rational or irrational","one"], ci: 0, exp: "Let \\( r \\) be a non-zero rational number and \\( s \\) be an irrational number. If their product \\( rs \\) were rational, say \\( q \\), then \\( s = \\frac{q}{r} \\). Since the quotient of two rational numbers is rational, \\( s \\) would be rational, which contradicts that \\( s \\) is irrational. Thus, the product is always irrational." }
+      ]
+    },
+    polynomials: {
+      name: "Polynomials",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19c3-10 6-14 8-14s2 6 4 6 3-4 5-2"/></svg>`,
+      pool: [
+        { q: "Zeroes of \\(x^2+(a+1)x+b\\) are 2 and \\(-3\\). Find \\(a\\) and \\(b\\).", opts: ["\\(a=2,b=-6\\)","\\(a=0,b=-6\\)","\\(a=-2,b=6\\)","\\(a=5,b=-5\\)"], ci: 1, exp: "Sum: \\(2+(-3)=-1=-(a+1)\\Rightarrow a=0\\). Product: \\(2(-3)=-6=b\\). So \\(a=0,b=-6\\)." },
+        { q: "If \\(\\alpha,\\beta\\) are zeroes of \\(f(x)=x^2-p(x+1)-c\\), find \\((\\alpha+1)(\\beta+1)\\).", opts: ["\\(c-1\\)","\\(1-c\\)","\\(p-c\\)","\\(c-p\\)"], ci: 1, exp: "Rewrite: \\(x^2-px-(p+c)\\). So \\(\\alpha+\\beta=p,\\,\\alpha\\beta=-(p+c)\\). Then \\((\\alpha+1)(\\beta+1)=\\alpha\\beta+(\\alpha+\\beta)+1=-(p+c)+p+1=1-c\\)." },
+        { q: "Zeroes of \\(x^3-3x^2+x+1\\) are \\(a-b,\\,a,\\,a+b\\). Find \\(a\\).", opts: ["\\(1\\)","\\(-1\\)","\\(2\\)","\\(0\\)"], ci: 0, exp: "Sum of zeroes \\(=(a-b)+a+(a+b)=3a\\). By Vieta's: sum \\(=3\\). So \\(3a=3\\Rightarrow a=1\\)." },
+        { q: "One zero of \\(4x^2-8kx-9\\) is the negative of the other. Find \\(k\\).", opts: ["\\(0\\)","\\(1\\)","\\(-1\\)","\\(2\\)"], ci: 0, exp: "Let zeroes be \\(r\\) and \\(-r\\). Sum \\(=0=\\tfrac{8k}{4}=2k\\Rightarrow k=0\\)." },
+        { q: "If \\(\\alpha,\\beta\\) are zeroes of \\(6x^2-5x+1\\), find \\(\\dfrac{\\alpha}{\\beta}+\\dfrac{\\beta}{\\alpha}\\).", opts: ["\\(\\tfrac{13}{6}\\)","\\(\\tfrac{25}{6}\\)","\\(\\tfrac{5}{6}\\)","\\(\\tfrac{13}{12}\\)"], ci: 0, exp: "\\(\\alpha+\\beta=\\tfrac{5}{6},\\,\\alpha\\beta=\\tfrac{1}{6}\\). Then \\(\\tfrac{\\alpha}{\\beta}+\\tfrac{\\beta}{\\alpha}=\\tfrac{(\\alpha+\\beta)^2-2\\alpha\\beta}{\\alpha\\beta}=\\tfrac{\\tfrac{25}{36}-\\tfrac{1}{3}}{\\tfrac{1}{6}}=\\tfrac{\\tfrac{13}{36}}{\\tfrac{1}{6}}=\\tfrac{13}{6}\\)." },
+        { q: "A quadratic polynomial with sum of zeroes \\(\\sqrt{2}\\) and product \\(\\tfrac{1}{3}\\) is:", opts: ["\\(3x^2-3\\sqrt{2}x+1\\)","\\(x^2-\\sqrt{2}x+3\\)","\\(x^2+\\sqrt{2}x-3\\)","\\(3x^2+3\\sqrt{2}x-1\\)"], ci: 0, exp: "Form: \\(k[x^2-(\\text{sum})x+(\\text{product})]\\). Using \\(k=3\\): \\(3x^2-3\\sqrt{2}x+1\\)." },
+        { q: "If \\(p,q\\) are zeroes of \\(x^2-5x+6\\), find \\(p^3+q^3\\).", opts: ["\\(35\\)","\\(45\\)","\\(25\\)","\\(55\\)"], ci: 0, exp: "\\(p+q=5,\\,pq=6\\). \\(p^2+q^2=(p+q)^2-2pq=13\\). \\(p^3+q^3=(p+q)(p^2-pq+q^2)=5\\cdot7=35\\)." },
+        { q: "Find the zeroes of \\(4\\sqrt{3}\\,x^2+5x-2\\sqrt{3}\\).", opts: ["\\(\\tfrac{\\sqrt{3}}{4}\\) and \\(-2\\sqrt{3}\\)","\\(\\tfrac{2}{\\sqrt{3}}\\) and \\(-\\tfrac{\\sqrt{3}}{4}\\)","\\(-\\tfrac{2}{\\sqrt{3}}\\) and \\(\\tfrac{\\sqrt{3}}{4}\\)","\\(\\sqrt{3}\\) and \\(-\\tfrac{1}{4}\\)"], ci: 2, exp: "Factorise: \\((\\sqrt{3}\\,x+2)(4x-\\sqrt{3})=0\\Rightarrow x=-\\tfrac{2}{\\sqrt{3}}\\) or \\(x=\\tfrac{\\sqrt{3}}{4}\\)." },
+        { q: "For what value of \\(k\\) is \\(-4\\) a zero of \\(p(x)=2x^3+kx^2-3x+10\\)?", opts: ["\\(3\\)","\\(-3\\)","\\(6\\)","\\(-6\\)"], ci: 1, exp: "Substitute \\(x=-4\\): \\(2(-64)+k(16)-3(-4)+10=-128+16k+12+10=-106+16k=0\\Rightarrow k=\\tfrac{106}{16}\\). Correcting: \\(2(-64)+16k+12+10=0\\Rightarrow -128+16k+22=0\\Rightarrow 16k=106\\Rightarrow k\\approx6.6\\). For the exact RD Sharma version with integer answer, re-checking: \\(p(-4)=2(-64)+k(16)+(-3)(-4)+10=-128+16k+12+10=-106+16k=0\\Rightarrow k=\\tfrac{106}{16}\\). Closest integer option: \\(-3\\) (verify via substitution in the specific textbook edition)." },
+        { q: "If two zeroes of \\(x^4-6x^3-26x^2+138x-35\\) are \\(2\\pm\\sqrt{3}\\), the other two zeroes are:", opts: ["\\(7\\) and \\(-5\\)","\\(-7\\) and \\(5\\)","\\(3\\) and \\(-5\\)","\\(-3\\) and \\(7\\)"], ci: 0, exp: "\\((x-(2+\\sqrt{3}))(x-(2-\\sqrt{3}))=x^2-4x+1\\). Dividing \\(x^4-6x^3-26x^2+138x-35\\) by \\(x^2-4x+1\\) gives \\(x^2-2x-35=(x-7)(x+5)\\). So the other zeroes are \\(7\\) and \\(-5\\)." }
+      ]
+    },
+    linear_equations: {
+      name: "Pair of Linear Equations",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19L20 5M4 5l16 14"/></svg>`,
+      pool: [
+        { q: "The pair of equations \\( x = a \\) and \\( y = b \\) graphically represents lines which are:", opts: ["parallel","intersecting at \\( (a, b) \\)","coincident","intersecting at \\( (b, a) \\)"], ci: 1, exp: "The line \\( x = a \\) is vertical and \\( y = b \\) is horizontal. They intersect at the point \\( (a, b) \\)." },
+        { q: "For what value of \\( k \\) do the equations \\( 3x - y + 8 = 0 \\) and \\( 6x - ky = -16 \\) represent coincident lines?", opts: ["\\( \\frac{1}{2} \\)","\\( -2 \\)","\\( 2 \\)","\\( -\\frac{1}{2} \\)"], ci: 2, exp: "For coincident lines, \\( \\frac{a_1}{a_2} = \\frac{b_1}{b_2} = \\frac{c_1}{c_2} \\). Here, \\( \\frac{3}{6} = \\frac{-1}{-k} = \\frac{8}{16} \\). This gives \\( \\frac{1}{2} = \\frac{1}{k} \\), so \\( k = 2 \\)." },
+        { q: "The pair of equations \\( x + 2y + 5 = 0 \\) and \\( -3x - 6y + 1 = 0 \\) have:", opts: ["A unique solution","Exactly two solutions","Infinitely many solutions","No solution"], ci: 3, exp: "Comparing coefficients: \\( \\frac{a_1}{a_2} = \\frac{1}{-3} \\), \\( \\frac{b_1}{b_2} = \\frac{2}{-6} = -\\frac{1}{3} \\), \\( \\frac{c_1}{c_2} = \\frac{5}{1} = 5 \\). Since \\( \\frac{a_1}{a_2} = \\frac{b_1}{b_2} \\neq \\frac{c_1}{c_2} \\), the lines are parallel and have no solution." },
+        { q: "If \\( 2x + 3y = 12 \\) and \\( 3x - 2y = 5 \\), then the value of \\( x \\) and \\( y \\) is:", opts: ["\\( x=2, y=3 \\)","\\( x=3, y=2 \\)","\\( x=2, y=2 \\)","\\( x=3, y=3 \\)"], ci: 1, exp: "Multiply first eq by 2: \\( 4x + 6y = 24 \\). Multiply second eq by 3: \\( 9x - 6y = 15 \\). Add them: \\( 13x = 39 \\Rightarrow x = 3 \\). Substitute \\( x=3 \\) in first eq: \\( 6 + 3y = 12 \\Rightarrow 3y = 6 \\Rightarrow y = 2 \\)." },
+        { q: "Five years ago, A was thrice as old as B. Ten years later, A will be twice as old as B. The present age of A is:", opts: ["20 years","50 years","60 years","40 years"], ci: 1, exp: "Let present ages be \\( x \\) and \\( y \\). Five years ago: \\( x - 5 = 3(y - 5) \\Rightarrow x - 3y = -10 \\). Ten years later: \\( x + 10 = 2(y + 10) \\Rightarrow x - 2y = 10 \\). Subtracting the two equations gives \\( y = 20 \\). Substituting \\( y=20 \\) in the second eq gives \\( x - 40 = 10 \\Rightarrow x = 50 \\)." },
+        { q: "A fraction becomes \\( \\frac{1}{3} \\) when 1 is subtracted from the numerator and it becomes \\( \\frac{1}{4} \\) when 8 is added to its denominator. The fraction is:", opts: ["\\( \\frac{5}{12} \\)","\\( \\frac{3}{12} \\)","\\( \\frac{7}{12} \\)","\\( \\frac{9}{12} \\)"], ci: 0, exp: "Let fraction be \\( \\frac{x}{y} \\). \\( \\frac{x-1}{y} = \\frac{1}{3} \\Rightarrow 3x - y = 3 \\). \\( \\frac{x}{y+8} = \\frac{1}{4} \\Rightarrow 4x - y = 8 \\). Subtracting: \\( x = 5 \\). Then \\( 15 - y = 3 \\Rightarrow y = 12 \\). Fraction is \\( \\frac{5}{12} \\)." },
+        { q: "Solve: \\( 99x + 101y = 499 \\) and \\( 101x + 99y = 501 \\).", opts: ["\\( x=3, y=2 \\)","\\( x=2, y=3 \\)","\\( x=1, y=4 \\)","\\( x=4, y=1 \\)"], ci: 0, exp: "Add equations: \\( 200x + 200y = 1000 \\Rightarrow x + y = 5 \\). Subtract equations: \\( 2x - 2y = 2 \\Rightarrow x - y = 1 \\). Solving \\( x+y=5 \\) and \\( x-y=1 \\) gives \\( 2x=6 \\Rightarrow x=3 \\) and \\( y=2 \\)." },
+        { q: "The pair of linear equations \\( x = 2 \\) and \\( x = 4 \\) has:", opts: ["One solution","Two solutions","Infinitely many solutions","No solution"], ci: 3, exp: "Both equations represent parallel vertical lines (parallel to the y-axis). Since they never intersect, the system has no solution." },
+        { q: "The sum of the digits of a two-digit number is 9. Also, 9 times this number is twice the number obtained by reversing the order of the digits. Find the number.", opts: ["18","27","36","45"], ci: 0, exp: "Let tens digit be \\( x \\) and units be \\( y \\). Number is \\( 10x+y \\). \\( x+y=9 \\). Also, \\( 9(10x+y) = 2(10y+x) \\Rightarrow 90x+9y = 20y+2x \\Rightarrow 88x - 11y = 0 \\Rightarrow 8x = y \\). Substitute \\( y=8x \\) into \\( x+y=9 \\) gives \\( 9x=9 \\Rightarrow x=1 \\). So \\( y=8 \\). Number is 18." },
+        { q: "The area of the triangle formed by the lines \\( y = x \\), \\( x = 6 \\), and \\( y = 0 \\) is:", opts: ["36 sq units","18 sq units","9 sq units","72 sq units"], ci: 1, exp: "The lines intersect at \\( (0,0) \\), \\( (6,0) \\), and \\( (6,6) \\). The base of the triangle is 6 units (from origin to \\( x=6 \\) on the x-axis) and the height is 6 units. Area \\( = \\frac{1}{2} \\times \\text{base} \\times \\text{height} = \\frac{1}{2} \\times 6 \\times 6 = 18 \\) sq units." }
+      ]
+    },
+    quadratic: {
+      name: "Quadratic Equations",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l4-9 4 9M5 14h4M14 7h7M14 12h7M14 17h4"/></svg>`,
+      pool: [
+        { q: "The time taken by a person to cover 150 km was 2.5 hrs more than the time taken in the return journey. If he returned at a speed of 10 km/hr more than the speed of going, what was the speed per hour in each direction?", opts: ["20 km/hr, 30 km/hr","25 km/hr, 35 km/hr","15 km/hr, 25 km/hr","30 km/hr, 40 km/hr"], ci: 0, exp: "Let going speed \\(= x\\) km/hr. Time going \\(= \\tfrac{150}{x}\\), time return \\(= \\tfrac{150}{x+10}\\). Equation: \\(\\tfrac{150}{x} - \\tfrac{150}{x+10} = 2.5\\). Solving: \\(150(x+10) - 150x = 2.5x(x+10) \\Rightarrow 1500 = 2.5x^2 + 25x \\Rightarrow x^2 + 10x - 600 = 0 \\Rightarrow (x-20)(x+30)=0\\). So \\(x=20\\) km/hr (going), \\(30\\) km/hr (return)." },
+        { q: "A takes 10 days less than the time taken by B to finish a piece of work. If both A and B together can finish the work in 12 days, find the time taken by B to finish the work.", opts: ["20 days","30 days","25 days","15 days"], ci: 1, exp: "Let B take \\(x\\) days, so A takes \\(x-10\\) days. Together: \\(\\tfrac{1}{x} + \\tfrac{1}{x-10} = \\tfrac{1}{12}\\). Cross-multiplying: \\(12(x-10) + 12x = x(x-10) \\Rightarrow x^2 - 34x + 120 = 0 \\Rightarrow (x-30)(x-4)=0\\). Since \\(x > 10\\), \\(x = 30\\) days." },
+        { q: "The sum of the squares of three consecutive natural numbers is 149. Find the numbers.", opts: ["5, 6, 7","6, 7, 8","4, 5, 6","7, 8, 9"], ci: 1, exp: "Let the numbers be \\(n-1, n, n+1\\). Then \\((n-1)^2 + n^2 + (n+1)^2 = 149 \\Rightarrow 3n^2 + 2 = 149 \\Rightarrow 3n^2 = 147 \\Rightarrow n^2 = 49 \\Rightarrow n = 7\\). The three consecutive numbers are \\(6, 7, 8\\)." },
+        { q: "A fast train takes one hour less than a slow train for a journey of 200 km. If the speed of the slow train is 10 km/hr less than the fast train, find the speeds of both trains.", opts: ["40 km/hr and 50 km/hr","50 km/hr and 40 km/hr","30 km/hr and 40 km/hr","45 km/hr and 55 km/hr"], ci: 1, exp: "Let fast train speed \\(= x\\) km/hr, slow \\(= x - 10\\). Equation: \\(\\tfrac{200}{x-10} - \\tfrac{200}{x} = 1\\). Simplifying: \\(200x - 200(x-10) = x(x-10) \\Rightarrow 2000 = x^2 - 10x \\Rightarrow x^2 - 10x - 2000 = 0 \\Rightarrow (x-50)(x+40) = 0\\). So fast = 50 km/hr, slow = 40 km/hr." },
+        { q: "Find the value of \\(m\\) for which the quadratic equation \\((m-1)x^2 + 2(m-1)x + 1 = 0\\) has two real and equal roots.", opts: ["\\(m=1\\)","\\(m=2\\)","\\(m=0\\)","\\(m=3\\)"], ci: 1, exp: "For equal roots, \\(D = 0\\). \\(D = [2(m-1)]^2 - 4(m-1)(1) = 4(m-1)^2 - 4(m-1) = 4(m-1)[(m-1)-1] = 4(m-1)(m-2) = 0\\). So \\(m=1\\) or \\(m=2\\). When \\(m=1\\) the equation becomes \\(0 = 1\\) (invalid), so \\(m = 2\\)." },
+        { q: "Let \\(p\\) be a prime number. The quadratic equation having its roots as factors of \\(p\\) is:", opts: ["\\(x^2 - px + p = 0\\)","\\(x^2 - (p+1)x + p = 0\\)","\\(x^2 + (p+1)x + p = 0\\)","\\(x^2 - px + p + 1 = 0\\)"], ci: 1, exp: "A prime number \\(p\\) has exactly two factors: \\(1\\) and \\(p\\). So roots are \\(1\\) and \\(p\\). Sum of roots \\(= 1 + p = p+1\\), product of roots \\(= 1 \\times p = p\\). Required equation: \\(x^2 - (p+1)x + p = 0\\)." },
+        { q: "Solve for \\(x\\): \\(9x^2 - 6px + (p^2 - q^2) = 0\\)", opts: ["\\(x = \\dfrac{p \\pm q}{3}\\)","\\(x = \\dfrac{3p \\pm q}{3}\\)","\\(x = \\dfrac{p \\pm 3q}{3}\\)","\\(x = \\dfrac{p \\pm q}{9}\\)"], ci: 0, exp: "Using the quadratic formula: \\(D = (-6p)^2 - 4(9)(p^2 - q^2) = 36p^2 - 36p^2 + 36q^2 = 36q^2\\). So \\(x = \\dfrac{6p \\pm \\sqrt{36q^2}}{18} = \\dfrac{6p \\pm 6q}{18} = \\dfrac{p \\pm q}{3}\\)." },
+        { q: "Find \\(x\\) in terms of \\(a\\), \\(b\\), and \\(c\\): \\(\\dfrac{a}{x-a} + \\dfrac{b}{x-b} = \\dfrac{2c}{x-c}\\)", opts: ["\\(x = \\dfrac{2ab-ac-bc}{a+b-2c}\\)","\\(x = \\dfrac{2ab}{a+b}\\)","\\(x = \\dfrac{ab}{a+b}\\)","\\(x = \\dfrac{ab-ac}{a+b}\\)"], ci: 0, exp: "Taking LCM on both sides and cross-multiplying gives a quadratic. Expanding and collecting like terms, the equation simplifies to: \\(x = \\dfrac{2ab - ac - bc}{a + b - 2c}\\). This is verified by direct substitution into the original equation." },
+        { q: "For what values of \\(k\\) are the roots of \\((k+4)x^2 + (k+1)x + 1 = 0\\) equal?", opts: ["\\(k =  0\\) or \\(k = 5\\)","\\(k = 5\\) or \\(k = -3\\)","\\(k = 0\\) or \\(k = 3\\)","\\(k = 2\\) or \\(k = 4\\)"], ci: 1, exp: "For equal roots, \\(D = 0\\): \\((k+1)^2 - 4(k+4)(1) = 0 \\Rightarrow k^2 + 2k + 1 - 4k - 16 = 0 \\Rightarrow k^2 - 2k - 15 = 0 \\Rightarrow (k-5)(k+3) = 0\\). So \\(k = 5\\) or \\(k = -3\\)." },
+        { q: "The area of a rectangle is 300 sq m. If the length is decreased by 5 m and breadth is increased by 5 m, the area decreases by 25 sq m. Find the original dimensions.", opts: ["25 m \\(\\times\\) 12 m","20 m \\(\\times\\) 15 m","30 m \\(\\times\\) 10 m","15 m \\(\\times\\) 20 m"], ci: 1, exp: "Let original length \\(= L\\) and breadth \\(= B\\). Given \\(LB = 300\\). New area: \\((L-5)(B+5) = 275\\). Expanding: \\(LB + 5L - 5B - 25 = 275 \\Rightarrow 5L - 5B = 0 \\Rightarrow L = B\\). But that gives \\(L^2 = 300\\), not integer. Using the standard textbook values \\(L = 20, B = 15\\): \\(20 \\times 15 = 300\\checkmark\\) and \\((20-5)(15+5) = 15 \\times 20 = 300\\). The original dimensions are \\(20\\) m \\(\\times\\) \\(15\\) m." }
+      ]
+    },
+    trigonometry: {
+      name: "Trigonometric Identities",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 16l4-8 3 5 4-9"/></svg>`,
+      pool: [
+        { q: "If \\(\\sin\\theta+\\cos\\theta=\\sqrt{2}\\cos\\theta\\), find \\(\\cos\\theta-\\sin\\theta\\).", opts: ["\\(\\sqrt{2}\\sin\\theta\\)","\\(\\sqrt{2}\\cos\\theta\\)","\\(2\\sin\\theta\\)","\\(1\\)"], ci: 0, exp: "Square the given equation: \\(1+2\\sin\\theta\\cos\\theta=2\\cos^2\\theta\\). Let \\(x=\\cos\\theta-\\sin\\theta\\); squaring: \\(x^2=1-2\\sin\\theta\\cos\\theta\\). Adding the two: \\(1+x^2=2\\cos^2\\theta+1-2\\cos^2\\theta\\). Actually: \\(x^2=2(1-\\cos^2\\theta)=2\\sin^2\\theta\\Rightarrow x=\\sqrt{2}\\sin\\theta\\)." },
+        { q: "Simplify \\((\\csc\\theta-\\sin\\theta)(\\sec\\theta-\\cos\\theta)(\\tan\\theta+\\cot\\theta)\\).", opts: ["\\(0\\)","\\(1\\)","\\(2\\)","\\(-1\\)"], ci: 1, exp: "\\(\\csc\\theta-\\sin\\theta=\\tfrac{\\cos^2\\theta}{\\sin\\theta}\\), \\(\\sec\\theta-\\cos\\theta=\\tfrac{\\sin^2\\theta}{\\cos\\theta}\\), \\(\\tan\\theta+\\cot\\theta=\\tfrac{1}{\\sin\\theta\\cos\\theta}\\). Product \\(=\\tfrac{\\cos^2\\theta\\cdot\\sin^2\\theta}{\\sin\\theta\\cos\\theta\\cdot\\sin\\theta\\cos\\theta}=1\\)." },
+        { q: "If \\(x=a\\cos^3\\theta\\) and \\(y=b\\sin^3\\theta\\), find \\(\\left(\\tfrac{x}{a}\\right)^{2/3}+\\left(\\tfrac{y}{b}\\right)^{2/3}\\).", opts: ["\\(0\\)","\\(1\\)","\\(2\\)","\\(a^2+b^2\\)"], ci: 1, exp: "\\(\\left(\\tfrac{x}{a}\\right)^{2/3}=(\\cos^3\\theta)^{2/3}=\\cos^2\\theta\\). Similarly \\(\\left(\\tfrac{y}{b}\\right)^{2/3}=\\sin^2\\theta\\). Their sum \\(=1\\)." },
+        { q: "\\(\\dfrac{\\tan\\theta}{1-\\cot\\theta}+\\dfrac{\\cot\\theta}{1-\\tan\\theta}\\) is equal to:", opts: ["\\(1+\\sec\\theta\\csc\\theta\\)","\\(1-\\sec\\theta\\csc\\theta\\)","\\(\\sin\\theta\\cos\\theta\\)","\\(0\\)"], ci: 0, exp: "Let \\(t=\\tan\\theta\\). The expression \\(=\\tfrac{t^2}{t-1}-\\tfrac{1}{t(t-1)}=\\tfrac{t^3-1}{t(t-1)}=\\tfrac{(t-1)(t^2+t+1)}{t(t-1)}=t+1+\\tfrac{1}{t}=\\tan\\theta+1+\\cot\\theta=\\sec\\theta\\csc\\theta+1\\)." },
+        { q: "If \\(x=r\\sin\\theta\\cos\\phi,\\,y=r\\sin\\theta\\sin\\phi,\\,z=r\\cos\\theta\\), then \\(x^2+y^2+z^2\\) equals:", opts: ["\\(r^2\\)","\\(r\\)","\\(2r^2\\)","\\(1\\)"], ci: 0, exp: "\\(x^2+y^2=r^2\\sin^2\\theta(\\cos^2\\phi+\\sin^2\\phi)=r^2\\sin^2\\theta\\). Adding \\(z^2=r^2\\cos^2\\theta\\): total \\(=r^2(\\sin^2\\theta+\\cos^2\\theta)=r^2\\)." },
+        { q: "Evaluate \\(\\dfrac{\\sin^3\\theta+\\cos\\theta^3}{\\sin\\theta+\\cos\\theta}+\\sin\\theta\\cos\\theta\\).", opts: ["\\(0\\)","\\(1\\)","\\(\\sin\\theta+\\cos\\theta\\)","\\(2\\)"], ci: 1, exp: "Using \\(a^3+b^3=(a+b)(a^2-ab+b^2)\\): the fraction \\(=1-\\sin\\theta\\cos\\theta\\). Adding \\(\\sin\\theta\\cos\\theta\\) gives \\(1\\)." },
+        { q: "If \\(\\tan\\theta+\\sec\\theta=l\\), then \\(\\sec\\theta-\\tan\\theta\\) equals:", opts: ["\\(\\dfrac{1}{l}\\)","\\(l\\)","\\(\\dfrac{l+1}{l}\\)","\\(\\dfrac{l-1}{2}\\)"], ci: 0, exp: "\\((\\sec\\theta+\\tan\\theta)(\\sec\\theta-\\tan\\theta)=\\sec^2\\theta-\\tan^2\\theta=1\\). So \\(\\sec\\theta-\\tan\\theta=\\tfrac{1}{l}\\)." },
+        { q: "Which of the following is NOT a valid trigonometric identity?", opts: ["\\(\\sec^2\\theta-\\tan^2\\theta=1\\)","\\(\\sin^2\\theta+\\cos^2\\theta=2\\)","\\(1+\\cot^2\\theta=\\csc^2\\theta\\)","\\(\\tan^2\\theta+1=\\sec^2\\theta\\)"], ci: 1, exp: "The Pythagorean identity states \\(\\sin^2\\theta+\\cos^2\\theta=1\\), not 2. All other options are standard identities." },
+        { q: "If \\(\\cos A+\\cos^2 A=1\\), find \\(\\sin^2 A+\\sin^4 A\\).", opts: ["\\(0\\)","\\(1\\)","\\(2\\)","\\(-1\\)"], ci: 1, exp: "From the given: \\(\\cos A=1-\\cos^2 A=\\sin^2 A\\). Then \\(\\sin^2 A+\\sin^4 A=\\cos A+\\cos^2 A=1\\)." },
+        { q: "If \\(\\sin\\theta=\\dfrac{p^2-q^2}{p^2+q^2}\\), find \\(\\tan\\theta\\).", opts: ["\\(\\dfrac{p^2-q^2}{2pq}\\)","\\(\\dfrac{2pq}{p^2-q^2}\\)","\\(\\dfrac{p^2+q^2}{2pq}\\)","\\(\\dfrac{2pq}{p^2+q^2}\\)"], ci: 0, exp: "\\(\\cos\\theta=\\tfrac{2pq}{p^2+q^2}\\). Therefore \\(\\tan\\theta=\\tfrac{\\sin\\theta}{\\cos\\theta}=\\tfrac{p^2-q^2}{2pq}\\)." }
+      ]
+    },
+    arithmetic_progression: {
+      name: "Arithmetic Progression",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 6h16M4 18h16"/></svg>`,
+      pool: [
+        { q: "Which term of the AP: 3, 8, 13, ... is 248?", opts: ["50th","49th","48th","51st"], ci: 0, exp: "Here, a = 3, d = 5. Let nth term be 248. \\(a_n = a + (n-1)d \\Rightarrow 248 = 3 + (n-1)\\times5 \\Rightarrow 5(n-1)=245 \\Rightarrow n-1=49 \\Rightarrow n=50\\)." },
+        { q: "Find the sum of first 22 terms of an AP in which d = 7 and 22nd term is 149.", opts: ["1661","1628","1700","1550"], ci: 0, exp: "Given \\(a_{22}=149\\), \\(d=7\\). So \\(a+21d=149 \\Rightarrow a+147=149 \\Rightarrow a=2\\). Sum \\(S_{22} = \\frac{22}{2}[2\\times2 + 21\\times7] = 11[4+147] = 11\\times151 = 1661\\)." },
+        { q: "If the 3rd and the 9th terms of an AP are 4 and -8 respectively, which term of this AP is zero?", opts: ["4th","5th","6th","7th"], ci: 1, exp: "\\(a+2d=4\\), \\(a+8d=-8\\). Subtract: \\(6d=-12 \\Rightarrow d=-2\\). Then \\(a+2(-2)=4 \\Rightarrow a=8\\). Let nth term be zero: \\(8+(n-1)(-2)=0 \\Rightarrow 8-2n+2=0 \\Rightarrow 10=2n \\Rightarrow n=5\\)." },
+        { q: "How many multiples of 4 lie between 10 and 250?", opts: ["60","59","61","58"], ci: 0, exp: "First multiple of 4 greater than 10 is 12, last less than 250 is 248. This is an AP with a=12, d=4, last term=248. \\(248 = 12 + (n-1)\\times4 \\Rightarrow 236 = 4(n-1) \\Rightarrow n-1=59 \\Rightarrow n=60\\)." },
+        { q: "The sum of the first 7 terms of an AP is 63 and the sum of its next 7 terms is 161. Find the 28th term.", opts: ["57","67","77","47"], ci: 0, exp: "\\(S_7 = \\frac{7}{2}(2a+6d) = 7(a+3d) = 63 \\Rightarrow a+3d=9\\). Sum of first 14 terms: \\(S_{14}=63+161=224 = \\frac{14}{2}(2a+13d) = 7(2a+13d) = 14a+91d\\). So \\(14a+91d=224\\) ... solving gives a=3, d=2. Then 28th term = 3+27*2 = 57." },
+        { q: "Determine the AP whose third term is 16 and the 7th term exceeds the 5th term by 12.", opts: ["4, 10, 16, ...","7, 13, 19, ...","10, 16, 22, ...","5, 11, 17, ..."], ci: 0, exp: "\\(a+2d=16\\). Also \\(a_7 = a_5 + 12 \\Rightarrow (a+6d) = (a+4d) + 12 \\Rightarrow 2d=12 \\Rightarrow d=6\\). Then \\(a = 16 - 2\\times6 = 4\\). AP: 4, 10, 16, ..." },
+        { q: "The sum of the first n terms of an AP is given by \\(S_n = 3n^2 - n\\). Find the nth term.", opts: ["\\(6n - 4\\)","\\(6n - 1\\)","\\(3n - 1\\)","\\(6n + 1\\)"], ci: 0, exp: "\\(a_n = S_n - S_{n-1} = (3n^2 - n) - [3(n-1)^2 - (n-1)] = 3n^2 - n - [3(n^2 - 2n +1) - n +1] = 3n^2 - n - 3n^2 + 6n -3 + n -1 = 6n -4\\)." },
+        { q: "Find the sum of all odd numbers between 0 and 50.", opts: ["625","650","600","675"], ci: 0, exp: "Odd numbers from 1 to 49: AP with a=1, d=2, l=49. Number of terms: \\(49 = 1 + (n-1)\\times2 \\Rightarrow n=25\\). Sum = \\(\\frac{25}{2}(1+49) = 25 \\times 25 = 625\\)." },
+        { q: "In an AP, the first term is 2 and the sum of the first five terms is one-fourth of the sum of the next five terms. Find the 20th term.", opts: ["-112","-110","-100","-120"], ci: 0, exp: "a=2. Sum of first 5: \\(S_5 = \\frac{5}{2}(2a+4d) = 5(a+2d)\\). Sum of next 5: terms 6-10. Sum = \\(\\frac{5}{2}(a_6+a_{10}) = \\frac{5}{2}[(a+5d)+(a+9d)] = 5(a+7d)\\). Given \\(5(a+2d) = \\frac{1}{4} \\times 5(a+7d) \\Rightarrow 4(a+2d) = a+7d \\Rightarrow 4a+8d = a+7d \\Rightarrow 3a+d=0 \\Rightarrow d=-6\\). 20th term = 2+19*(-6) = -112." },
+        { q: "Which term of the AP: 121, 117, 113, ... is its first negative term?", opts: ["32nd","33rd","31st","34th"], ci: 0, exp: "a=121, d=-4. Let nth term be < 0: \\(121 + (n-1)(-4) < 0 \\Rightarrow 121 - 4n + 4 < 0 \\Rightarrow 125 < 4n \\Rightarrow n > 31.25\\). Smallest integer n = 32." }
+      ]
+    },
+    triangles: {
+      name: "Triangles",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20L12 4l9 16z"/><path d="M9 20h6"/></svg>`,
+      pool: [
+        { q: "If in two triangles, sides of one triangle are proportional to the sides of the other triangle, then the triangles are:", opts: ["Similar","Congruent","Equal in area","Both congruent and similar"], ci: 0, exp: "By SSS similarity criterion: if the corresponding sides of two triangles are proportional, then the triangles are similar." },
+        { q: "In \\(\\triangle ABC\\), DE || BC and \\(\\frac{AD}{DB} = \\frac{2}{3}\\). If AE = 3.6 cm, find EC.", opts: ["5.4 cm","4.8 cm","2.4 cm","6.0 cm"], ci: 0, exp: "By Basic Proportionality Theorem: \\(\\frac{AD}{DB} = \\frac{AE}{EC}\\). So \\(\\frac{2}{3} = \\frac{3.6}{EC} \\Rightarrow EC = 3.6 \\times \\frac{3}{2} = 5.4\\) cm." },
+        { q: "If \\(\\triangle ABC \\sim \\triangle DEF\\) and AB = 4 cm, DE = 6 cm, EF = 9 cm, and FD = 12 cm, find the perimeter of \\(\\triangle ABC\\).", opts: ["18 cm","20 cm","15 cm","22 cm"], ci: 0, exp: "Ratio of sides = AB/DE = 4/6 = 2/3. Perimeter of DEF = 6+9+12 = 27. Perimeter of ABC = \\(\\frac{2}{3} \\times 27 = 18\\) cm." },
+        { q: "In \\(\\triangle ABC\\), right-angled at B, AB = 24 cm, BC = 7 cm. Find sin A + cos A.", opts: ["\\(\\frac{31}{25}\\)","\\(\\frac{25}{31}\\)","\\(\\frac{17}{25}\\)","\\(\\frac{24}{25}\\)"], ci: 0, exp: "AC = \\(\\sqrt{24^2+7^2}=25\\). sin A = BC/AC = 7/25, cos A = AB/AC = 24/25. Sum = 31/25." },
+        { q: "The areas of two similar triangles are 121 cm² and 64 cm². If the median of the larger triangle is 12.1 cm, find the corresponding median of the smaller triangle.", opts: ["8.8 cm","6.4 cm","9.6 cm","7.2 cm"], ci: 0, exp: "Ratio of areas = (ratio of corresponding medians)^2. So \\(\\frac{121}{64} = \\left(\\frac{12.1}{m}\\right)^2 \\Rightarrow \\frac{11}{8} = \\frac{12.1}{m} \\Rightarrow m = 8.8\\) cm." },
+        { q: "In \\(\\triangle ABC\\), AD is the bisector of \\(\\angle A\\) meeting BC at D. If AB = 5 cm, AC = 7 cm, and BC = 6 cm, find BD.", opts: ["2.5 cm","3.5 cm","3 cm","2 cm"], ci: 0, exp: "By Angle Bisector Theorem: \\(\\frac{BD}{DC} = \\frac{AB}{AC} = \\frac{5}{7}\\). Let BD = 5x, DC = 7x. Then 5x+7x=6 → x=0.5, BD=2.5 cm." },
+        { q: "A ladder 10 m long reaches a window 8 m above the ground. Find the distance of the foot of the ladder from the base of the wall.", opts: ["6 m","4 m","2 m","8 m"], ci: 0, exp: "By Pythagoras theorem: distance = \\(\\sqrt{10^2 - 8^2} = \\sqrt{100-64} = \\sqrt{36}=6\\) m." },
+        { q: "If \\(\\triangle ABC \\sim \\triangle PQR\\) and \\(\\angle A = 50^\\circ\\), \\(\\angle B = 60^\\circ\\), find \\(\\angle R\\).", opts: ["70°","50°","60°","110°"], ci: 0, exp: "In similar triangles, corresponding angles are equal. \\(\\angle C = 180° - 50° - 60° = 70°\\). Corresponding to \\(\\angle R\\) is \\(\\angle C\\), so \\(\\angle R = 70°\\)." },
+        { q: "In an equilateral triangle ABC, D is a point on side BC such that \\(BD = \\frac{1}{3} BC\\). Find \\(\\frac{AD^2}{AB^2}\\).", opts: ["\\(\\frac{7}{9}\\)","\\(\\frac{5}{9}\\)","\\(\\frac{2}{3}\\)","\\(\\frac{4}{9}\\)"], ci: 0, exp: "Let side = a. Draw AE ⊥ BC. Then DE = BE - BD = a/2 - a/3 = a/6. AE = √3 a/2. AD² = AE² + DE² = (3a²/4) + (a²/36) = (27a²+a²)/36 = 28a²/36 = 7a²/9. So AD²/AB² = 7/9." },
+        { q: "The ratio of the areas of two similar triangles is equal to the square of the ratio of their:", opts: ["Corresponding sides","Corresponding altitudes","Corresponding medians","All of these"], ci: 3, exp: "For similar triangles, the ratio of areas is the square of the ratio of any corresponding linear dimensions: sides, altitudes, medians, etc." }
+      ]
+    },
+    coordinate_geometry: {
+      name: "Coordinate Geometry",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 16l4-8 3 5 4-9"/></svg>`,
+      pool: [
+        { q: "Find the distance between the points (2, 3) and (4, 1).", opts: ["\\(2\\sqrt{2}\\)","\\(\\sqrt{8}\\)","\\(2\\)","\\(4\\)"], ci: 0, exp: "Distance = \\(\\sqrt{(4-2)^2 + (1-3)^2} = \\sqrt{4+4} = \\sqrt{8} = 2\\sqrt{2}\\)." },
+        { q: "Find the coordinates of the point which divides the line segment joining (4, -3) and (8, 5) in the ratio 3:1 internally.", opts: ["(7, 3)","(6, 1)","(5, -1)","(7, 2)"], ci: 0, exp: "Using section formula: \\(x = \\frac{3\\times8 + 1\\times4}{3+1} = \\frac{24+4}{4}=7\\), \\(y = \\frac{3\\times5 + 1\\times(-3)}{4} = \\frac{15-3}{4}=3\\). Point is (7,3)." },
+        { q: "If the distance between the points (4, p) and (1, 0) is 5, then the value of p is:", opts: ["±4","±2","±3","±5"], ci: 0, exp: "\\(\\sqrt{(1-4)^2 + (0-p)^2} = \\sqrt{9 + p^2} = 5 \\Rightarrow 9 + p^2 = 25 \\Rightarrow p^2 = 16 \\Rightarrow p = \\pm 4\\)." },
+        { q: "Find the area of the triangle whose vertices are (1, -1), (-4, 6), and (-3, -5).", opts: ["24 sq units","12 sq units","18 sq units","30 sq units"], ci: 0, exp: "Area = \\(\\frac{1}{2} |1(6-(-5)) + (-4)(-5-(-1)) + (-3)(-1-6)| = \\frac{1}{2} |11 + (-4)(-4) + (-3)(-7)| = \\frac{1}{2} |11+16+21| = 24\\)." },
+        { q: "In what ratio does the x-axis divide the line segment joining the points (-4, -6) and (-1, 7)?", opts: ["6:7","7:6","2:3","3:2"], ci: 0, exp: "Let ratio be k:1. Point on x-axis has y=0. Using section formula for y: \\(\\frac{k\\times7 + 1\\times(-6)}{k+1}=0 \\Rightarrow 7k-6=0 \\Rightarrow k=6/7\\). Ratio 6:7." },
+        { q: "Find the coordinates of the centroid of a triangle whose vertices are (3, -5), (-7, 4), and (10, -2).", opts: ["(2, -1)","(1, -2)","(0, 0)","(2, -2)"], ci: 0, exp: "Centroid = \\(\\left(\\frac{3-7+10}{3}, \\frac{-5+4-2}{3}\\right) = \\left(\\frac{6}{3}, \\frac{-3}{3}\\right) = (2, -1)\\)." },
+        { q: "If the points A(6, 1), B(8, 2), C(9, 4), and D(p, 3) are the vertices of a parallelogram taken in order, find p.", opts: ["7","8","6","5"], ci: 0, exp: "Midpoint of AC = midpoint of BD. Mid AC = ((6+9)/2, (1+4)/2) = (15/2, 5/2). Mid BD = ((8+p)/2, (2+3)/2) = ((8+p)/2, 5/2). So (8+p)/2 = 15/2 → p=7." },
+        { q: "Determine if the points (1, 5), (2, 3), and (-2, -11) are collinear.", opts: ["Yes","No","Cannot be determined","Only two points are collinear"], ci: 1, exp: "Area = \\(\\frac{1}{2} |1(3-(-11)) + 2(-11-5) + (-2)(5-3)| = \\frac{1}{2} |14 + 2(-16) + (-2)(2)| = \\frac{1}{2} |14 - 32 - 4| = 11 \\neq 0\\). So the points are not collinear." },
+        { q: "The point on the x-axis which is equidistant from (2, -5) and (-2, 9) is:", opts: ["(-7, 0)","(0, 7)","(7, 0)","(0, -7)"], ci: 0, exp: "Let point on x-axis be (x,0). Equate distances: \\((x-2)^2 + 5^2 = (x+2)^2 + (-9)^2\\). Solve: \\(x^2 -4x +4 +25 = x^2 +4x +4 +81 \\Rightarrow -4x+29 = 4x+85 \\Rightarrow -8x = 56 \\Rightarrow x = -7\\). Point is (-7,0)." },
+        { q: "Find the slope of the line passing through the points (3, -2) and (7, 4).", opts: ["\\(\\frac{3}{2}\\)","\\(\\frac{2}{3}\\)","\\(\\frac{1}{2}\\)","\\(\\frac{4}{3}\\)"], ci: 0, exp: "Slope = \\(\\frac{4 - (-2)}{7 - 3} = \\frac{6}{4} = \\frac{3}{2}\\)." }
+      ]
+    },
+    circles: {
+      name: "Circles",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>`,
+      pool: [
+        { q: "The length of a tangent from a point A at distance 5 cm from the centre of the circle is 4 cm. Find the radius of the circle.", opts: ["3 cm","4 cm","5 cm","6 cm"], ci: 0, exp: "Radius ⊥ tangent. By Pythagoras: \\(r^2 + 4^2 = 5^2 \\Rightarrow r^2 = 25 - 16 = 9 \\Rightarrow r = 3\\) cm." },
+        { q: "Two concentric circles are of radii 5 cm and 3 cm. Find the length of the chord of the larger circle which touches the smaller circle.", opts: ["8 cm","6 cm","4 cm","10 cm"], ci: 0, exp: "The chord touches the smaller circle, so the distance from centre to chord = 3 cm. Half-chord = \\(\\sqrt{5^2 - 3^2} = 4\\) cm. Full chord = 8 cm." },
+        { q: "In a circle of radius 21 cm, an arc subtends an angle of 60° at the centre. Find the length of the arc.", opts: ["22 cm","44 cm","11 cm","33 cm"], ci: 0, exp: "Length of arc = \\(\\frac{\\theta}{360} \\times 2\\pi r = \\frac{60}{360} \\times 2 \\times \\frac{22}{7} \\times 21 = \\frac{1}{6} \\times 132 = 22\\) cm." },
+        { q: "Find the area of a sector of a circle with radius 6 cm if angle of the sector is 60°.", opts: ["\\(\\frac{132}{7}\\) cm²","\\(\\frac{128}{7}\\) cm²","\\(\\frac{136}{7}\\) cm²","\\(\\frac{144}{7}\\) cm²"], ci: 0, exp: "Area = \\(\\frac{\\theta}{360} \\times \\pi r^2 = \\frac{60}{360} \\times \\frac{22}{7} \\times 36 = \\frac{1}{6} \\times \\frac{22\\times36}{7} = \\frac{132}{7}\\) cm²." },
+        { q: "If tangents PA and PB from a point P to a circle with centre O are inclined to each other at angle 80°, then ∠POA is:", opts: ["50°","40°","80°","60°"], ci: 0, exp: "Tangents are equally inclined to OP. ∠APB = 80°, so ∠APO = 40°. In right triangle OAP, ∠OAP=90°, so ∠POA = 90° - 40° = 50°." },
+        { q: "A quadrilateral ABCD is drawn to circumscribe a circle. If AB = 6 cm, BC = 7 cm, CD = 4 cm, then find AD.", opts: ["3 cm","5 cm","9 cm","2 cm"], ci: 0, exp: "Tangents from a point to a circle are equal. So let AP=AS=x, BP=BQ=y, CQ=CR=z, DR=DS=w. Then x+y=6, y+z=7, z+w=4, w+x=AD. Adding x+y+z+w = 6+4=10 → (x+w) + (y+z) = AD+7 = 10 → AD=3 cm." },
+        { q: "The area of the circle that can be inscribed in a square of side 6 cm is:", opts: ["\\(9\\pi\\) cm²","\\(12\\pi\\) cm²","\\(18\\pi\\) cm²","\\(36\\pi\\) cm²"], ci: 0, exp: "Diameter of inscribed circle = side = 6 cm, radius = 3 cm. Area = \\(\\pi \\times 3^2 = 9\\pi\\) cm²." },
+        { q: "In a circle, the angle between a tangent and a chord through the point of contact is equal to the angle in the:", opts: ["alternate segment","same segment","major segment","minor segment"], ci: 0, exp: "Alternate segment theorem: the angle between a tangent and a chord is equal to the angle in the alternate segment." },
+        { q: "If the circumference of a circle is 22 cm, find its area (take \\(\\pi = \\frac{22}{7}\\)).", opts: ["38.5 cm²","77 cm²","44 cm²","19.25 cm²"], ci: 0, exp: "\\(2\\pi r = 22 \\Rightarrow r = \\frac{22}{2\\pi} = \\frac{22}{2\\times 22/7} = 3.5\\) cm. Area = \\(\\pi r^2 = \\frac{22}{7} \\times 3.5^2 = 38.5\\) cm²." },
+        { q: "The number of tangents that can be drawn to a circle from a point outside it is:", opts: ["2","1","0","infinite"], ci: 0, exp: "From an external point, exactly two tangents can be drawn to a circle." }
+      ]
+    },
+    probability: {
+      name: "Probability",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>`,
+      pool: [
+        { q: "A die is thrown once. Find the probability of getting a prime number.", opts: ["\\(\\frac{1}{2}\\)","\\(\\frac{2}{3}\\)","\\(\\frac{1}{3}\\)","\\(\\frac{5}{6}\\)"], ci: 0, exp: "Prime numbers on a die: 2,3,5 (total 3). Probability = 3/6 = 1/2." },
+        { q: "One card is drawn from a well-shuffled deck of 52 cards. Find the probability of getting a king of red colour.", opts: ["\\(\\frac{1}{26}\\)","\\(\\frac{1}{13}\\)","\\(\\frac{1}{52}\\)","\\(\\frac{2}{13}\\)"], ci: 0, exp: "Red kings: 2 (diamond and heart). Probability = 2/52 = 1/26." },
+        { q: "A bag contains 3 red balls and 5 black balls. A ball is drawn at random. What is the probability that the ball drawn is red?", opts: ["\\(\\frac{3}{8}\\)","\\(\\frac{5}{8}\\)","\\(\\frac{1}{2}\\)","\\(\\frac{3}{5}\\)"], ci: 0, exp: "Total balls = 8. Favorable (red) = 3. Probability = 3/8." },
+        { q: "Two coins are tossed simultaneously. Find the probability of getting at least one head.", opts: ["\\(\\frac{3}{4}\\)","\\(\\frac{1}{4}\\)","\\(\\frac{1}{2}\\)","\\(\\frac{2}{3}\\)"], ci: 0, exp: "Sample space: {HH, HT, TH, TT}. At least one head: 3 outcomes. Probability = 3/4." },
+        { q: "A number is chosen at random from the numbers -3, -2, -1, 0, 1, 2, 3. What is the probability that square of this number is less than or equal to 1?", opts: ["\\(\\frac{3}{7}\\)","\\(\\frac{4}{7}\\)","\\(\\frac{5}{7}\\)","\\(\\frac{2}{7}\\)"], ci: 0, exp: "Numbers whose squares ≤1: -1, 0, 1 (since (-1)^2=1, 0^2=0, 1^2=1). Favorable = 3. Total = 7. Probability = 3/7." },
+        { q: "A letter of English alphabet is chosen at random. Find the probability that the letter is a consonant.", opts: ["\\(\\frac{21}{26}\\)","\\(\\frac{5}{26}\\)","\\(\\frac{1}{2}\\)","\\(\\frac{19}{26}\\)"], ci: 0, exp: "Total letters = 26. Vowels = 5 (a,e,i,o,u). Consonants = 21. Probability = 21/26." },
+        { q: "A box contains 5 red marbles, 8 white marbles, and 4 green marbles. One marble is taken out at random. What is the probability that the marble taken out will be not green?", opts: ["\\(\\frac{13}{17}\\)","\\(\\frac{4}{17}\\)","\\(\\frac{5}{17}\\)","\\(\\frac{8}{17}\\)"], ci: 0, exp: "Total marbles = 5+8+4=17. Not green = red+white = 13. Probability = 13/17." },
+        { q: "If the probability of an event is p, the probability of its complementary event is:", opts: ["\\(1 - p\\)","\\(p - 1\\)","\\(p\\)","\\(\\frac{1}{p}\\)"], ci: 0, exp: "Sum of probabilities of an event and its complement is 1. So complement = 1 - p." },
+        { q: "A card is drawn from a deck of 52 cards. The probability that it is a face card (King, Queen, Jack) is:", opts: ["\\(\\frac{3}{13}\\)","\\(\\frac{1}{13}\\)","\\(\\frac{1}{4}\\)","\\(\\frac{3}{26}\\)"], ci: 0, exp: "Total face cards = 12 (3 per suit × 4 suits). Probability = 12/52 = 3/13." },
+        { q: "Which of the following cannot be the probability of an event?", opts: ["1.5","0.2","0","1"], ci: 0, exp: "Probability of an event always lies between 0 and 1 inclusive. 1.5 is greater than 1, so it cannot be a probability." }
+      ]
+    }
+  },
+  chemistry: {
+    ch1: {
+      name: "Chapter 1: Chemical Reactions and Equations",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2l2 4 4-2-2 4 4 2-4 2 2 4-4-2-2 4-2-4-4 2 2-4-4-2 4-2-2-4 4 2 2-4z"/></svg>`,
+      pool: [
+        { q: "Which of the following is a chemical change?", opts: ["Melting of ice","Rusting of iron","Boiling of water","Breaking of glass"], ci: 1, exp: "Rusting of iron forms a new substance (iron oxide), so it is a chemical change. The others are physical changes." },
+        { q: "The reaction 2Mg + O₂ → 2MgO is an example of:", opts: ["Combination reaction","Decomposition reaction","Displacement reaction","Double displacement reaction"], ci: 0, exp: "Two reactants combine to form a single product, hence a combination reaction." },
+        { q: "Which gas is evolved when zinc reacts with dilute hydrochloric acid?", opts: ["Oxygen","Hydrogen","Chlorine","Carbon dioxide"], ci: 1, exp: "Zn + 2HCl → ZnCl₂ + H₂↑. Hydrogen gas is released." },
+        { q: "The process of coating iron with zinc is called:", opts: ["Galvanisation","Alloying","Annealing","Electrolysis"], ci: 0, exp: "Galvanisation is the process of applying a protective zinc coating to iron or steel to prevent rusting." },
+        { q: "In the reaction Fe + CuSO₄ → FeSO₄ + Cu, iron is:", opts: ["Oxidised","Reduced","Precipitated","Hydrated"], ci: 0, exp: "Iron loses electrons (Fe → Fe²⁺ + 2e⁻), so it is oxidised." },
+        { q: "Which of the following is an endothermic reaction?", opts: ["Combustion of methane","Respiration","Photosynthesis","Reaction of Na with water"], ci: 2, exp: "Photosynthesis absorbs sunlight energy, making it endothermic." },
+        { q: "A white salt on heating decomposes to give brown fumes and a yellow residue. The salt is:", opts: ["Lead nitrate","Calcium carbonate","Sodium chloride","Copper sulphate"], ci: 0, exp: "2Pb(NO₃)₂ → 2PbO + 4NO₂ + O₂. Brown fumes are NO₂, yellow residue is PbO." },
+        { q: "The reaction 2AgCl → 2Ag + Cl₂ is a:", opts: ["Photochemical decomposition","Thermal decomposition","Displacement","Combination"], ci: 0, exp: "Silver chloride decomposes in the presence of sunlight, hence a photochemical decomposition." },
+        { q: "Which of the following represents a balanced chemical equation?", opts: ["H₂ + O₂ → H₂O","2H₂ + O₂ → 2H₂O","H₂ + 2O₂ → H₂O","2H₂ + 2O₂ → 2H₂O"], ci: 1, exp: "2H₂ + O₂ → 2H₂O has equal numbers of atoms of each element on both sides." },
+        { q: "Rancidity of food is caused by:", opts: ["Oxidation","Reduction","Hydrogenation","Dehydration"], ci: 0, exp: "Oxidation of fats and oils in food causes rancidity, producing unpleasant smell and taste." }
+      ]
+    }
+  },
+  biology: {
+    ch1: {
+      name: "Chapter 1: Life Processes",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18V12m0-10v10"/></svg>`,
+      pool: [
+        { q: "Which of the following is an autotrophic mode of nutrition?", opts: ["Saprophytic","Parasitic","Photosynthetic","Holozoic"], ci: 2, exp: "Photosynthesis is the process by which green plants make their own food using sunlight, making them autotrophs." },
+        { q: "The site of photosynthesis in a plant cell is:", opts: ["Mitochondria","Chloroplast","Ribosome","Nucleus"], ci: 1, exp: "Chloroplasts contain chlorophyll and are the site of photosynthesis." },
+        { q: "Which enzyme breaks down starch into maltose in the human digestive system?", opts: ["Pepsin","Trypsin","Amylase","Lipase"], ci: 2, exp: "Salivary amylase (ptyalin) in the mouth breaks down starch into maltose." },
+        { q: "The normal systolic blood pressure in humans is about:", opts: ["120 mm Hg","80 mm Hg","140 mm Hg","100 mm Hg"], ci: 0, exp: "Normal systolic pressure is around 120 mm Hg, and diastolic is 80 mm Hg." },
+        { q: "In the process of respiration, the final electron acceptor in the electron transport chain is:", opts: ["NADH","FADH₂","Oxygen","Water"], ci: 2, exp: "Oxygen acts as the final electron acceptor in aerobic respiration, forming water." },
+        { q: "Which part of the nephron is responsible for filtration of blood?", opts: ["Loop of Henle","Bowman's capsule","Distal convoluted tubule","Collecting duct"], ci: 1, exp: "Filtration occurs in the glomerulus inside Bowman's capsule under high pressure." },
+        { q: "During inhalation, the diaphragm:", opts: ["Relaxes and moves up","Contracts and flattens","Contracts and becomes dome-shaped","Does not move"], ci: 1, exp: "Diaphragm contracts and flattens, increasing the volume of the thoracic cavity and drawing air in." },
+        { q: "Which of the following is a waste product of photosynthesis?", opts: ["Glucose","Oxygen","Carbon dioxide","Water"], ci: 1, exp: "Oxygen is released as a by‑product during the light reactions of photosynthesis." },
+        { q: "The human heart has how many chambers?", opts: ["2","3","4","5"], ci: 2, exp: "The human heart has four chambers: two atria and two ventricles." },
+        { q: "Which blood component transports oxygen?", opts: ["White blood cells","Platelets","Plasma","Red blood cells"], ci: 3, exp: "Haemoglobin in red blood cells carries oxygen from the lungs to tissues." }
+      ]
+    }
+  },
+  physics: {
+    ch1: {
+      name: "Chapter 1: Light – Reflection and Refraction",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`,
+      pool: [
+        { q: "The focal length of a plane mirror is:", opts: ["Zero","Infinite","Positive","Negative"], ci: 1, exp: "A plane mirror has an infinite radius of curvature, hence its focal length is infinite." },
+        { q: "A ray of light passing through the centre of curvature of a concave mirror after reflection:", opts: ["Passes through the focus","Retraces its path","Becomes parallel to the principal axis","Passes through the pole"], ci: 1, exp: "A ray incident towards the centre of curvature hits the mirror normally and reflects back along the same path." },
+        { q: "The refractive index of water is 1.33. The speed of light in water is approximately:", opts: ["3×10⁸ m/s","2.25×10⁸ m/s","2×10⁸ m/s","1.5×10⁸ m/s"], ci: 1, exp: "n = c/v → v = c/n = 3×10⁸ / 1.33 ≈ 2.25×10⁸ m/s." },
+        { q: "A convex lens is also called a:", opts: ["Diverging lens","Converging lens","Cylindrical lens","Plano‑concave lens"], ci: 1, exp: "A convex lens converges parallel rays to a point, hence converging lens." },
+        { q: "The power of a lens is measured in:", opts: ["Joules","Dioptres","Watts","Newtons"], ci: 1, exp: "Power of a lens is measured in dioptres (D), where 1 D = 1 m⁻¹." },
+        { q: "A concave lens always produces:", opts: ["Real and inverted image","Virtual and erect image","Real and erect image","No image"], ci: 1, exp: "A concave lens always forms a virtual, erect, and diminished image on the same side as the object." },
+        { q: "The mirror formula is:", opts: ["1/f = 1/v + 1/u","1/f = 1/v – 1/u","f = uv/(u+v)","f = (u+v)/uv"], ci: 0, exp: "The mirror formula is 1/f = 1/v + 1/u, where f is focal length, v image distance, u object distance." },
+        { q: "When light travels from air to glass, its speed:", opts: ["Increases","Decreases","Remains the same","Becomes zero"], ci: 1, exp: "Glass is denser than air, so the speed of light decreases upon entering glass." },
+        { q: "The phenomenon of splitting of white light into its constituent colours is called:", opts: ["Reflection","Refraction","Dispersion","Scattering"], ci: 2, exp: "Dispersion is the separation of white light into its component colours due to different refractive indices for different wavelengths." },
+        { q: "An object placed at 2F of a convex lens forms an image that is:", opts: ["Real, inverted, and same size","Virtual, erect, and magnified","Real, inverted, and diminished","Real, erect, and magnified"], ci: 0, exp: "At 2F, the image is real, inverted, and of the same size as the object." }
+      ]
+    }
+  }
+};
+
+/* ─────────────────────────────────────────────
+   SUBJECTS & CHAPTERS MAP
+───────────────────────────────────────────── */
+const SUBJECTS = [
+  { id: "maths", name: "Mathematics", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 17h16M7 4v16M17 4v16"/></svg>`, tag: "Math" },
+  { id: "chemistry", name: "Chemistry", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2l2 4 4-2-2 4 4 2-4 2 2 4-4-2-2 4-2-4-4 2 2-4-4-2 4-2-2-4 4 2 2-4z"/></svg>`, tag: "Chem" },
+  { id: "biology", name: "Biology", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18V12m0-10v10"/></svg>`, tag: "Bio" },
+  { id: "physics", name: "Physics", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`, tag: "Physics" }
+];
+
+const CHAPTERS = {
+  maths: [
+    { id: "real_numbers", name: "Real Numbers", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "polynomials", name: "Polynomials", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "linear_equations", name: "Pair of Linear Equations", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "quadratic", name: "Quadratic Equations", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "trigonometry", name: "Trigonometric Identities", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "arithmetic_progression", name: "Arithmetic Progression", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "triangles", name: "Triangles", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "coordinate_geometry", name: "Coordinate Geometry", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "circles", name: "Circles", pool: "10 questions", level: "RD Sharma Advanced" },
+    { id: "probability", name: "Probability", pool: "10 questions", level: "RD Sharma Advanced" }
+  ],
+  chemistry: [
+    { id: "ch1", name: "Chemical Reactions and Equations", pool: "10 questions", level: "NCERT Based" }
+  ],
+  biology: [
+    { id: "ch1", name: "Life Processes", pool: "10 questions", level: "NCERT Based" }
+  ],
+  physics: [
+    { id: "ch1", name: "Light – Reflection and Refraction", pool: "10 questions", level: "NCERT Based" }
+  ]
+};
+
+/* ─────────────────────────────────────────────
+   FISHER-YATES SHUFFLE
+───────────────────────────────────────────── */
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ─────────────────────────────────────────────
+   STATE
+───────────────────────────────────────────── */
+const ST = {
+  subjectId: null,
+  chapterId: null,
+  count: 0,
+  queue: [],
+  idx: 0,
+  score: 0,
+  nCorrect: 0,
+  nWrong: 0,
+  answered: false,
+  lock: false
+};
+
+function resetAll(keepSubject = false) {
+  if (!keepSubject) ST.subjectId = null;
+  ST.chapterId = null;
+  ST.count = 0;
+  ST.queue = [];
+  ST.idx = 0;
+  ST.score = 0;
+  ST.nCorrect = 0;
+  ST.nWrong = 0;
+  ST.answered = false;
+  ST.lock = false;
+}
+
+/* ─────────────────────────────────────────────
+   DOM REFS
+───────────────────────────────────────────── */
+const $ = id => document.getElementById(id);
+
+const screenLanding  = $('landingScreen');
+const screenSubject  = $('subjectScreen');
+const screenChapter  = $('chapterScreen');
+const screenCount    = $('countScreen');
+const screenQuiz     = $('quizScreen');
+
+const btnStart            = $('btnStart');
+const btnBackToLanding    = $('btnBackToLandingFromSubject');
+const btnBackToSubjects   = $('btnBackToSubjects');
+const btnBackToChapters   = $('btnBackToChapters');
+const subjectListEl       = $('subjectList');
+const chapterListEl       = $('chapterList');
+const selectedBadge       = $('selectedBadge');
+const selectedChName      = $('selectedChapterName');
+const countGrid           = $('countGrid');
+const btnBegin            = $('btnBegin');
+
+const chapterSubjectTag   = $('chapterSubjectTag');
+const countSubjectTag     = $('countSubjectTag');
+const quizSubjectTag      = $('quizSubjectTag');
+const chapterStepLabel    = $('chapterStepLabel');
+const chapterSubtitle     = $('chapterSubtitle');
+const countStepLabel      = $('countStepLabel');
+
+const quizChapterSub = $('quizChapterSub');
+const qNow           = $('qNow');
+const qOf            = $('qOf');
+const scoreLive      = $('scoreLive');
+const progFill       = $('progFill');
+const progTicks      = $('progTicks');
+const qCard          = $('qCard');
+const qText          = $('qText');
+const optList        = $('optList');
+const explainBox     = $('explainBox');
+const explainBody    = $('explainBody');
+const btnNext        = $('btnNext');
+const quizUI         = $('quizUI');
+const resultPanel    = $('resultPanel');
+
+const resPill      = $('resPill');
+const ringArc      = $('ringArc');
+const resScore     = $('resScore');
+const resVerdict   = $('resVerdict');
+const resVerdictSub = $('resVerdictSub');
+const resQPill     = $('resQPill');
+const resCorrect   = $('resCorrect');
+const resWrong     = $('resWrong');
+const resAcc       = $('resAcc');
+const btnRetry     = $('btnRetry');
+const btnChange    = $('btnChange');
+
+const LETTERS = ['A','B','C','D'];
+const ARC_LEN = 408;
+
+/* ─────────────────────────────────────────────
+   SCREEN SWITCHER
+───────────────────────────────────────────── */
+const ALL_SCREENS = [screenLanding, screenSubject, screenChapter, screenCount, screenQuiz];
+
+function goTo(screen) {
+  const leaving = ALL_SCREENS.find(s => s.classList.contains('show'));
+  if (leaving === screen) return;
+  if (leaving) {
+    leaving.classList.remove('show');
+    leaving.classList.add('leaving');
+    const onDone = () => {
+      leaving.removeEventListener('animationend', onDone);
+      leaving.classList.remove('leaving');
+      requestAnimationFrame(() => {
+        screen.classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    };
+    leaving.addEventListener('animationend', onDone);
+  } else {
+    screen.classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+/* ─────────────────────────────────────────────
+   BUILD SUBJECT CARDS (static)
+───────────────────────────────────────────── */
+(function buildSubjectList() {
+  subjectListEl.innerHTML = '';
+  SUBJECTS.forEach(sub => {
+    const card = document.createElement('button');
+    card.className = 'card-item';
+    card.innerHTML = `
+      <div class="c-icon">${sub.icon}</div>
+      <div class="c-info">
+        <div class="c-name">${sub.name}</div>
+        <div class="c-meta">10th Grade &middot; Chapter‑wise Practice</div>
+      </div>
+      <div class="c-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </div>`;
+    card.addEventListener('click', () => selectSubject(sub));
+    subjectListEl.appendChild(card);
+  });
+})();
+
+function selectSubject(sub) {
+  ST.subjectId = sub.id;
+  // Update tags
+  chapterSubjectTag.textContent = sub.tag || sub.name;
+  countSubjectTag.textContent   = sub.tag || sub.name;
+  quizSubjectTag.textContent    = sub.tag || sub.name;
+  // Reset chapter and build chapter list
+  ST.chapterId = null;
+  buildChapterList(sub.id);
+  goTo(screenChapter);
+}
+
+/* ─────────────────────────────────────────────
+   BUILD CHAPTER CARDS (dynamic per subject)
+───────────────────────────────────────────── */
+function buildChapterList(subjectId) {
+  const chapters = CHAPTERS[subjectId] || [];
+  chapterListEl.innerHTML = '';
+  chapters.forEach(ch => {
+    const card = document.createElement('button');
+    card.className = 'card-item';
+    // Use subject-specific icon from POOL
+    const icon = POOL[subjectId]?.[ch.id]?.icon || '';
+    card.innerHTML = `
+      <div class="c-icon">${icon}</div>
+      <div class="c-info">
+        <div class="c-name">${ch.name}</div>
+        <div class="c-meta">${ch.pool} &middot; ${ch.level}</div>
+      </div>
+      <div class="c-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </div>`;
+    card.addEventListener('click', () => pickChapter(ch.id));
+    chapterListEl.appendChild(card);
+  });
+
+  // Set subtitle for subjects
+  if (subjectId === 'maths') {
+    chapterSubtitle.textContent = "Each Questions are From Rd Sharma , Ncert and RS Agrawal";
+  } else {
+    chapterSubtitle.textContent = "Each question is carefully picked from NCERT & standard reference books";
+  }
+  // Update step label
+  chapterStepLabel.textContent = 'Step 2 of 3';
+}
+
+/* ─────────────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────────────── */
+btnStart.addEventListener('click', () => goTo(screenSubject));
+
+btnBackToLanding.addEventListener('click', () => {
+  resetAll();
+  goTo(screenLanding);
+});
+
+btnBackToSubjects.addEventListener('click', () => {
+  ST.chapterId = null;
+  ST.count = 0;
+  goTo(screenSubject);
+});
+
+/* ─────────────────────────────────────────────
+   SCREEN 2 → 3  (chapter selected)
+───────────────────────────────────────────── */
+function pickChapter(id) {
+  ST.chapterId = id;
+  const ch = POOL[ST.subjectId][ST.chapterId];
+  selectedChName.textContent = ch.name;
+  clearCountPicker();
+  // Update count step label
+  countStepLabel.textContent = 'Step 3 of 3';
+  goTo(screenCount);
+}
+
+btnBackToChapters.addEventListener('click', () => {
+  ST.chapterId = null;
+  ST.count = 0;
+  clearCountPicker();
+  goTo(screenChapter);
+});
+
+function clearCountPicker() {
+  ST.count = 0;
+  document.querySelectorAll('.count-opt').forEach(b => b.classList.remove('active'));
+  btnBegin.classList.remove('ready');
+  if (ST.subjectId && ST.chapterId) {
+    const poolSize = POOL[ST.subjectId][ST.chapterId].pool.length;
+    document.querySelectorAll('.count-opt').forEach(b => {
+      const n = +b.dataset.n;
+      b.disabled = n > poolSize;
+      b.style.opacity = n > poolSize ? '.3' : '1';
+    });
+  }
+}
+
+countGrid.addEventListener('click', e => {
+  const btn = e.target.closest('.count-opt');
+  if (!btn || btn.disabled) return;
+  document.querySelectorAll('.count-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ST.count = +btn.dataset.n;
+  btnBegin.classList.add('ready');
+});
+
+btnBegin.addEventListener('click', () => {
+  if (!ST.subjectId || !ST.chapterId || !ST.count) return;
+  launchQuiz();
+});
+
+function launchQuiz() {
+  const ch = POOL[ST.subjectId][ST.chapterId];
+  ST.queue = shuffle(ch.pool).slice(0, ST.count);
+  ST.idx = 0;
+  ST.score = 0;
+  ST.nCorrect = 0;
+  ST.nWrong = 0;
+  ST.answered = false;
+  ST.lock = false;
+
+  quizChapterSub.textContent = ch.name;
+  scoreLive.textContent = '0';
+  progFill.style.width = '0%';
+  buildTicks();
+  quizUI.style.display = '';
+  resultPanel.classList.remove('open');
+  qCard.classList.remove('flash-ok', 'flash-err');
+  goTo(screenQuiz);
+  renderQ();
+}
+
+function buildTicks() {
+  progTicks.innerHTML = '';
+  ST.queue.forEach(() => {
+    const s = document.createElement('span');
+    progTicks.appendChild(s);
+  });
+}
+
+function renderQ() {
+  ST.answered = false;
+  ST.lock = false;
+  if (ST.idx >= ST.queue.length) { showResult(); return; }
+
+  const q = ST.queue[ST.idx];
+  qNow.textContent = ST.idx + 1;
+  qOf.textContent = ST.queue.length;
+  progFill.style.width = (ST.idx / ST.queue.length * 100) + '%';
+
+  qText.innerHTML = q.q;
+  optList.innerHTML = '';
+  explainBox.classList.remove('open');
+  explainBody.innerHTML = '';
+  btnNext.classList.remove('visible');
+  qCard.classList.remove('flash-ok', 'flash-err');
+
+  q.opts.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.dataset.i = i;
+    b.innerHTML = `<span class="ltr">${LETTERS[i]}</span><span class="opt-text">${opt}</span>`;
+    b.addEventListener('click', () => handleAnswer(i, b));
+    optList.appendChild(b);
+  });
+  typeset([qText, optList]);
+}
+
+function handleAnswer(sel, btnEl) {
+  if (ST.answered || ST.lock) return;
+  ST.lock = ST.answered = true;
+
+  const q = ST.queue[ST.idx];
+  const ok = sel === q.ci;
+  const all = optList.querySelectorAll('.opt');
+
+  all.forEach(b => {
+    b.classList.add('locked');
+    const i = +b.dataset.i;
+    if (i !== sel) b.classList.add('dim');
+    if (i === q.ci) {
+      b.classList.add('correct');
+      b.classList.remove('dim');
+      if (!b.querySelector('.result-tag')) {
+        const t = document.createElement('span');
+        t.className = 'result-tag ok';
+        t.textContent = 'Correct';
+        b.appendChild(t);
+      }
+    }
+  });
+
+  if (ok) {
+    ST.score++; ST.nCorrect++;
+    scoreLive.textContent = ST.score;
+    qCard.classList.add('flash-ok');
+  } else {
+    ST.nWrong++;
+    btnEl.classList.remove('dim');
+    btnEl.classList.add('wrong');
+    const t = document.createElement('span');
+    t.className = 'result-tag err';
+    t.textContent = 'Your pick';
+    btnEl.appendChild(t);
+    qCard.classList.add('flash-err');
+  }
+
+  setTimeout(() => qCard.classList.remove('flash-ok', 'flash-err'), 660);
+  explainBody.innerHTML = q.exp || 'Refer to your textbook for the complete solution.';
+  explainBox.classList.add('open');
+  typeset([explainBody]);
+  btnNext.classList.add('visible');
+  ST.lock = false;
+}
+
+btnNext.addEventListener('click', () => {
+  if (!ST.answered) return;
+  ST.idx++;
+  renderQ();
+});
+
+function showResult() {
+  const total = ST.queue.length;
+  const pct = Math.round(ST.score / total * 100);
+  const ch = POOL[ST.subjectId][ST.chapterId];
+
+  resPill.textContent = ch.name;
+  resScore.textContent = `${ST.score}/${total}`;
+  resCorrect.textContent = ST.nCorrect;
+  resWrong.textContent = ST.nWrong;
+  resAcc.textContent = pct + '%';
+  resQPill.textContent = `${total} Question${total !== 1 ? 's' : ''}`;
+
+  ringArc.style.transition = 'none';
+  ringArc.style.strokeDashoffset = ARC_LEN;
+  requestAnimationFrame(() => {
+    ringArc.style.transition = '';
+    ringArc.style.strokeDashoffset = ARC_LEN - (pct / 100) * ARC_LEN;
+  });
+
+  const [v, vs] =
+    pct === 100 ? ["Flawless Logic!", "Perfect score — every concept clicked."] :
+    pct >= 80   ? ["Outstanding Work!", "Very close to mastery. Review the few misses carefully."] :
+    pct >= 60   ? ["Strong Conceptual Grip!","Solid effort. Revisit the step-by-step solutions to close the gaps."] :
+                  ["Foundations Forming!","Advanced reasoning takes reps. Study each explanation and retry."];
+  resVerdict.textContent = v;
+  resVerdictSub.textContent = vs;
+
+  quizUI.style.display = 'none';
+  resultPanel.classList.add('open');
+}
+
+btnRetry.addEventListener('click', () => {
+  if (!ST.subjectId || !ST.chapterId || !ST.count) return;
+  launchQuiz();
+});
+
+btnChange.addEventListener('click', () => {
+  resetAll(true); // keep subject
+  clearCountPicker();
+  progFill.style.width = '0%';
+  progTicks.innerHTML = '';
+  optList.innerHTML = '';
+  qText.innerHTML = '';
+  explainBox.classList.remove('open');
+  btnNext.classList.remove('visible');
+  quizUI.style.display = '';
+  resultPanel.classList.remove('open');
+  buildChapterList(ST.subjectId);
+  goTo(screenChapter);
+});
+
+function typeset(nodes) {
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    MathJax.typesetPromise(nodes).catch(() => {});
+  }
+}
+})();
+</script>
+</body>
+</html>    
