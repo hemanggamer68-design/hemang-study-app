@@ -194,7 +194,6 @@ body::before{
 }
 .section-sub{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);margin-bottom:24px;}
 
-/* same card style for subjects and chapters */
 .card-list{display:flex;flex-direction:column;gap:12px;}
 
 .card-item{
@@ -250,7 +249,6 @@ body::before{
 .card-item:hover .c-arrow{transform:translateX(4px);color:var(--blue);}
 .c-arrow svg{width:17px;height:17px;}
 
-/* count & quiz styles unchanged */
 .selected-chapter-badge{
   display:inline-flex;align-items:center;gap:7px;
   font-family:var(--f-mono);font-size:10.5px;
@@ -607,7 +605,6 @@ footer{
     <div class="section-sub">Select a subject to begin chapter‑wise practice</div>
 
     <div class="card-list" id="subjectList">
-      <!-- built dynamically -->
     </div>
   </div>
 </section>
@@ -703,7 +700,7 @@ footer{
   </div>
 </section>
 
-<!-- Quiz Screen (unchanged) -->
+<!-- Quiz Screen -->
 <section class="screen" id="quizScreen">
   <div class="nav-bar">
     <div class="nav-brand">
@@ -1001,6 +998,70 @@ const POOL = {
         { q: "Which of the following represents a balanced chemical equation?", opts: ["H₂ + O₂ → H₂O","2H₂ + O₂ → 2H₂O","H₂ + 2O₂ → H₂O","2H₂ + 2O₂ → 2H₂O"], ci: 1, exp: "2H₂ + O₂ → 2H₂O has equal numbers of atoms of each element on both sides." },
         { q: "Rancidity of food is caused by:", opts: ["Oxidation","Reduction","Hydrogenation","Dehydration"], ci: 0, exp: "Oxidation of fats and oils in food causes rancidity, producing unpleasant smell and taste." }
       ]
+    },
+    ch2: {
+      name: "Chapter 2: Acids, Bases and Salts",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h8M12 2v4M5 8h14M5 8a7 7 0 0 0 14 0M5 8l-1 4h16l-1-4"/></svg>`,
+      pool: [
+        { q: "Which of the following is a strong acid?", opts: ["Acetic acid","Citric acid","Hydrochloric acid","Carbonic acid"], ci: 2, exp: "Hydrochloric acid (HCl) completely ionises in water, making it a strong acid. The others are weak acids." },
+        { q: "The pH of a neutral solution at 25°C is:", opts: ["0","7","14","1"], ci: 1, exp: "At 25°C, a neutral solution has equal concentrations of H⁺ and OH⁻ ions, giving a pH of 7." },
+        { q: "Which indicator gives red colour in acidic medium and yellow in basic medium?", opts: ["Phenolphthalein","Methyl orange","Litmus","Turmeric"], ci: 1, exp: "Methyl orange turns red in acidic solutions and yellow in basic solutions." },
+        { q: "Baking soda is chemically:", opts: ["Sodium carbonate","Sodium hydrogen carbonate","Calcium carbonate","Potassium carbonate"], ci: 1, exp: "Baking soda is sodium hydrogen carbonate (NaHCO₃), also known as sodium bicarbonate." },
+        { q: "Which of the following is used to neutralise excess acidity in the stomach?", opts: ["Aspirin","Milk of magnesia","Sodium chloride","Vinegar"], ci: 1, exp: "Milk of magnesia (Mg(OH)₂) is a mild base that neutralises excess stomach acid (HCl)." },
+        { q: "Bleaching powder is produced by the action of chlorine on:", opts: ["Dry slaked lime","Limestone","Quicklime","Gypsum"], ci: 0, exp: "Bleaching powder (CaOCl₂) is produced by passing chlorine gas over dry slaked lime: Ca(OH)₂ + Cl₂ → CaOCl₂ + H₂O." },
+        { q: "Plaster of Paris is obtained by heating:", opts: ["Limestone","Gypsum","Quicklime","Cement"], ci: 1, exp: "Plaster of Paris (CaSO₄·½H₂O) is produced by heating gypsum (CaSO₄·2H₂O) at about 373 K." },
+        { q: "The pH of a solution is 4. The solution is:", opts: ["Strongly acidic","Weakly acidic","Neutral","Basic"], ci: 1, exp: "A pH of 4 indicates a weakly acidic solution (pH < 7). Strong acids have pH close to 0-2." },
+        { q: "Which gas is evolved when an acid reacts with a metal carbonate?", opts: ["Oxygen","Hydrogen","Carbon dioxide","Nitrogen"], ci: 2, exp: "Acids react with metal carbonates and hydrogen carbonates to produce carbon dioxide gas, along with salt and water." },
+        { q: "The common name of sodium carbonate decahydrate is:", opts: ["Baking soda","Washing soda","Caustic soda","Soda lime"], ci: 1, exp: "Washing soda is sodium carbonate decahydrate (Na₂CO₃·10H₂O), used as a cleaning agent." }
+      ]
+    },
+    ch3: {
+      name: "Chapter 3: Metals and Non-metals",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>`,
+      pool: [
+        { q: "Which of the following metals is the most ductile?", opts: ["Iron","Copper","Gold","Aluminium"], ci: 2, exp: "Gold is the most ductile metal; one gram of gold can be drawn into a wire about 2 km long." },
+        { q: "The metal that is liquid at room temperature is:", opts: ["Sodium","Mercury","Gallium","Caesium"], ci: 1, exp: "Mercury (Hg) is the only metal that exists as a liquid at room temperature." },
+        { q: "Which of the following is an ionic compound?", opts: ["CH₄","CO₂","NaCl","H₂O"], ci: 2, exp: "NaCl (sodium chloride) is an ionic compound formed by the transfer of electrons between Na and Cl atoms." },
+        { q: "The process of extraction of metals from their ores and refining is called:", opts: ["Calcination","Roasting","Metallurgy","Electrolysis"], ci: 2, exp: "Metallurgy is the entire scientific process of extracting metals from their ores, including concentration, reduction, and refining." },
+        { q: "Which non-metal is a good conductor of electricity?", opts: ["Sulphur","Phosphorus","Graphite","Iodine"], ci: 2, exp: "Graphite, an allotrope of carbon, is a non-metal that conducts electricity due to delocalised electrons." },
+        { q: "Galvanisation is the process of coating iron with:", opts: ["Tin","Zinc","Copper","Chromium"], ci: 1, exp: "Galvanisation involves coating iron or steel with a layer of zinc to prevent rusting." },
+        { q: "The alloy 'stainless steel' contains:", opts: ["Fe, Cr, Ni","Fe, Cu, Zn","Fe, Al, Mg","Fe, Sn, Pb"], ci: 0, exp: "Stainless steel is an alloy of iron with chromium (≥10.5%) and nickel, known for its corrosion resistance." },
+        { q: "Which of the following metals does NOT react with cold water?", opts: ["Sodium","Potassium","Calcium","Iron"], ci: 3, exp: "Iron does not react with cold water. It reacts with steam to form Fe₃O₄ and H₂. Na, K, and Ca react vigorously with cold water." },
+        { q: "The ore of aluminium is:", opts: ["Haematite","Bauxite","Calamine","Galena"], ci: 1, exp: "Bauxite (Al₂O₃·2H₂O) is the primary ore of aluminium. Haematite is iron ore, calamine is zinc ore, and galena is lead ore." },
+        { q: "Electrolytic refining is used to purify:", opts: ["Iron","Zinc","Copper","Sodium"], ci: 2, exp: "Electrolytic refining is commonly used to obtain high-purity copper. The impure copper acts as the anode and pure copper deposits on the cathode." }
+      ]
+    },
+    ch4: {
+      name: "Chapter 4: Carbon and its Compounds",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><circle cx="8" cy="16" r="2.5"/><circle cx="16" cy="16" r="2.5"/><circle cx="12" cy="8" r="2.5"/></svg>`,
+      pool: [
+        { q: "The general formula of alkanes is:", opts: ["CₙH₂ₙ","CₙH₂ₙ₊₂","CₙH₂ₙ₋₂","CₙH₂ₙ₊₁"], ci: 1, exp: "Alkanes are saturated hydrocarbons with the general formula CₙH₂ₙ₊₂. Each carbon forms four single covalent bonds." },
+        { q: "Which of the following is a saturated hydrocarbon?", opts: ["Ethene","Ethyne","Ethane","Benzene"], ci: 2, exp: "Ethane (C₂H₆) is an alkane and contains only single bonds, making it a saturated hydrocarbon." },
+        { q: "The functional group -COOH represents:", opts: ["Aldehyde","Ketone","Carboxylic acid","Alcohol"], ci: 2, exp: "The -COOH group is the carboxyl functional group, characteristic of carboxylic acids such as acetic acid (CH₃COOH)." },
+        { q: "Soaps are formed by the saponification of:", opts: ["Alcohols","Esters","Carboxylic acids","Ketones"], ci: 1, exp: "Saponification is the alkaline hydrolysis of esters (fats and oils) to produce soaps (salts of fatty acids) and glycerol." },
+        { q: "Which of the following is a characteristic of covalent compounds?", opts: ["High melting point","Good electrical conductivity","Low melting point","High solubility in water"], ci: 2, exp: "Covalent compounds generally have low melting and boiling points due to weak intermolecular forces between molecules." },
+        { q: "The IUPAC name of CH₃CH₂OH is:", opts: ["Methanol","Ethanol","Propanol","Ethanal"], ci: 1, exp: "CH₃CH₂OH has two carbon atoms with an -OH group. Its IUPAC name is ethanol." },
+        { q: "Which catalyst is used in the hydrogenation of vegetable oils?", opts: ["Iron","Platinum","Nickel","Copper"], ci: 2, exp: "Nickel catalyst is used in the hydrogenation of unsaturated vegetable oils to produce solid vanaspati ghee." },
+        { q: "The self-linking property of carbon atoms to form long chains is called:", opts: ["Isomerism","Catenation","Polymerisation","Allotropy"], ci: 1, exp: "Catenation is the unique ability of carbon atoms to link with other carbon atoms to form long chains, rings, and complex structures." },
+        { q: "Which of the following will undergo addition reactions?", opts: ["Ethane","Propane","Ethene","Methane"], ci: 2, exp: "Ethene (C₂H₄) is an unsaturated hydrocarbon with a double bond, so it readily undergoes addition reactions." },
+        { q: "The cleansing action of soap is due to:", opts: ["Micelle formation","High molecular weight","Acidic nature","Alkaline nature"], ci: 0, exp: "Soap molecules form micelles in water. The hydrophobic tails trap oil/grease while the hydrophilic heads face outward, allowing dirt to be washed away." }
+      ]
+    },
+    ch5: {
+      name: "Chapter 5: Periodic Classification of Elements",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="6" height="6"/><rect x="10" y="2" width="6" height="6"/><rect x="18" y="2" width="4" height="6"/><rect x="2" y="10" width="6" height="6"/><rect x="10" y="10" width="6" height="6"/><rect x="18" y="10" width="4" height="6"/><rect x="2" y="18" width="6" height="4"/><rect x="10" y="18" width="6" height="4"/></svg>`,
+      pool: [
+        { q: "Who proposed the law of triads?", opts: ["Mendeleev","Newlands","Döbereiner","Moseley"], ci: 2, exp: "Johann Wolfgang Döbereiner proposed the law of triads in 1817, grouping three elements with similar properties where the middle element's atomic mass was approximately the average of the other two." },
+        { q: "The modern periodic table is based on:", opts: ["Atomic mass","Atomic number","Mass number","Density"], ci: 1, exp: "The modern periodic table, proposed by Henry Moseley, arranges elements in order of increasing atomic number (number of protons)." },
+        { q: "Elements in the same group have the same number of:", opts: ["Protons","Neutrons","Valence electrons","Electron shells"], ci: 2, exp: "Elements in the same group (vertical column) have the same number of valence electrons, which determines their similar chemical properties." },
+        { q: "Which of the following has the largest atomic radius?", opts: ["Li","Na","K","Rb"], ci: 3, exp: "Atomic radius increases down a group. Rubidium (Rb) is below K, Na, and Li in Group 1, so it has the largest atomic radius." },
+        { q: "The element with atomic number 17 belongs to which period?", opts: ["2","3","4","5"], ci: 1, exp: "Element with atomic number 17 (Chlorine) has electronic configuration 2,8,7. It has 3 shells, so it belongs to the 3rd period." },
+        { q: "Which of the following is the most electronegative element?", opts: ["Oxygen","Chlorine","Fluorine","Nitrogen"], ci: 2, exp: "Fluorine is the most electronegative element in the periodic table with an electronegativity value of 4.0 on the Pauling scale." },
+        { q: "The metallic character of elements _____ across a period from left to right.", opts: ["Increases","Decreases","Remains same","First increases then decreases"], ci: 1, exp: "Metallic character decreases across a period from left to right due to increasing effective nuclear charge and decreasing atomic size." },
+        { q: "Newlands' law of octaves was applicable up to which element?", opts: ["Sodium","Potassium","Calcium","Iron"], ci: 2, exp: "Newlands' law of octaves worked well only up to calcium (atomic mass ~40). Beyond calcium, the pattern broke down." },
+        { q: "Which of the following is a noble gas?", opts: ["Nitrogen","Oxygen","Argon","Hydrogen"], ci: 2, exp: "Argon (Ar) is a noble gas belonging to Group 18 of the periodic table. It has a completely filled outer electron shell." },
+        { q: "In Mendeleev's periodic table, the element eka-aluminium was later discovered as:", opts: ["Silicon","Germanium","Gallium","Scandium"], ci: 2, exp: "Mendeleev predicted the existence of eka-aluminium. It was later discovered and named gallium, matching Mendeleev's predicted properties closely." }
+      ]
     }
   },
   biology: {
@@ -1019,6 +1080,70 @@ const POOL = {
         { q: "The human heart has how many chambers?", opts: ["2","3","4","5"], ci: 2, exp: "The human heart has four chambers: two atria and two ventricles." },
         { q: "Which blood component transports oxygen?", opts: ["White blood cells","Platelets","Plasma","Red blood cells"], ci: 3, exp: "Haemoglobin in red blood cells carries oxygen from the lungs to tissues." }
       ]
+    },
+    ch2: {
+      name: "Chapter 2: Control and Coordination",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M6 14c0-3 3-5 6-5s6 2 6 5M4 20h16M9 16l-2 4M15 16l2 4"/></svg>`,
+      pool: [
+        { q: "The structural and functional unit of the nervous system is:", opts: ["Nephron","Neuron","Alveolus","Glomerulus"], ci: 1, exp: "The neuron is the basic structural and functional unit of the nervous system, responsible for transmitting nerve impulses." },
+        { q: "Which part of the brain controls posture and balance?", opts: ["Cerebrum","Cerebellum","Medulla oblongata","Hypothalamus"], ci: 1, exp: "The cerebellum is responsible for maintaining posture, balance, and coordinating voluntary movements." },
+        { q: "The gap between two neurons across which nerve impulses pass is called:", opts: ["Dendrite","Axon","Synapse","Myelin"], ci: 2, exp: "A synapse is the junction between two neurons where neurotransmitters transmit signals from one neuron to the next." },
+        { q: "Which hormone regulates blood sugar levels?", opts: ["Thyroxine","Insulin","Adrenaline","Oestrogen"], ci: 1, exp: "Insulin, produced by the beta cells of the Islets of Langerhans in the pancreas, lowers blood glucose levels." },
+        { q: "Iodine is essential for the synthesis of which hormone?", opts: ["Insulin","Adrenaline","Thyroxine","Growth hormone"], ci: 2, exp: "Iodine is a key component of thyroxine (T₃ and T₄), produced by the thyroid gland. Deficiency leads to goitre." },
+        { q: "The plant hormone that promotes cell division is:", opts: ["Auxin","Gibberellin","Cytokinin","Abscisic acid"], ci: 2, exp: "Cytokinins promote cell division (cytokinesis) in plants, particularly in roots and developing fruits." },
+        { q: "Tropic movement in plants in response to light is called:", opts: ["Geotropism","Phototropism","Hydrotropism","Chemotropism"], ci: 1, exp: "Phototropism is the directional growth of a plant in response to light. Shoots grow towards light (positive phototropism)." },
+        { q: "The hormone adrenaline is secreted by:", opts: ["Thyroid gland","Pancreas","Adrenal glands","Pituitary gland"], ci: 2, exp: "Adrenaline (epinephrine) is secreted by the adrenal glands, located on top of each kidney. It prepares the body for 'fight or flight'." },
+        { q: "Which part of the nervous system controls involuntary actions like heartbeat?", opts: ["Cerebrum","Cerebellum","Autonomic nervous system","Somatic nervous system"], ci: 2, exp: "The autonomic nervous system (ANS) controls involuntary functions such as heartbeat, peristalsis, and glandular secretions." },
+        { q: "Deficiency of growth hormone in childhood leads to:", opts: ["Gigantism","Dwarfism","Goitre","Diabetes"], ci: 1, exp: "Growth hormone deficiency during childhood results in pituitary dwarfism, characterised by abnormally short stature." }
+      ]
+    },
+    ch3: {
+      name: "Chapter 3: How do Organisms Reproduce?",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><circle cx="16" cy="16" r="5"/><line x1="12" y1="12" x2="14" y2="14"/></svg>`,
+      pool: [
+        { q: "Which of the following is a mode of asexual reproduction?", opts: ["Fertilisation","Binary fission","Pollination","Conjugation"], ci: 1, exp: "Binary fission is a type of asexual reproduction where a single organism divides into two identical daughter cells, common in bacteria and Amoeba." },
+        { q: "The process of transfer of pollen grains from anther to stigma is called:", opts: ["Fertilisation","Pollination","Germination","Dispersal"], ci: 1, exp: "Pollination is the transfer of pollen grains from the anther (male part) to the stigma (female part) of a flower." },
+        { q: "In human females, fertilisation normally occurs in the:", opts: ["Ovary","Uterus","Fallopian tube (oviduct)","Vagina"], ci: 2, exp: "Fertilisation (fusion of sperm and egg) typically occurs in the ampulla region of the fallopian tube (oviduct)." },
+        { q: "Regeneration is a method of reproduction seen in:", opts: ["Amoeba","Hydra","Planaria","Paramecium"], ci: 2, exp: "Planaria (a flatworm) has remarkable regenerative abilities. A small fragment can regenerate into a complete organism." },
+        { q: "The female gamete in flowering plants is present in the:", opts: ["Pollen grain","Embryo sac","Anther","Sepal"], ci: 1, exp: "The female gamete (egg cell) is located inside the embryo sac, which is embedded in the ovule of the flower." },
+        { q: "The placenta in humans:", opts: ["Produces gametes","Provides nutrition to the developing embryo","Stores sperms","Protects the ovary"], ci: 1, exp: "The placenta is a disc-shaped structure that attaches the foetus to the uterine wall, providing oxygen and nutrients and removing waste." },
+        { q: "Which contraceptive method prevents ovulation?", opts: ["Condom","Copper-T","Oral pills","Vasectomy"], ci: 2, exp: "Oral contraceptive pills contain hormones that suppress ovulation by regulating the pituitary gland's hormone secretion." },
+        { q: "Spore formation is a method of reproduction in:", opts: ["Amoeba","Hydra","Rhizopus (bread mould)","Spirogyra"], ci: 2, exp: "Rhizopus (bread mould) reproduces asexually through spore formation. Spores are produced inside sporangia." },
+        { q: "The male reproductive hormone testosterone is produced by:", opts: ["Seminal vesicle","Prostate gland","Leydig cells (interstitial cells)","Seminiferous tubules"], ci: 2, exp: "Leydig cells (interstitial cells) located in the testes produce testosterone, the primary male sex hormone." },
+        { q: "Fragmentation is a type of reproduction observed in:", opts: ["Amoeba","Spirogyra","Hydra","Yeast"], ci: 1, exp: "Spirogyra, a filamentous alga, reproduces by fragmentation. Each broken fragment grows into a new filament." }
+      ]
+    },
+    ch4: {
+      name: "Chapter 4: Heredity and Evolution",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l4 16M12 8l-4 8M20 4l-4 16M8 20l4-8"/></svg>`,
+      pool: [
+        { q: "The basic unit of heredity is the:", opts: ["Chromosome","Gene","Nucleus","Cell"], ci: 1, exp: "A gene is the basic physical and functional unit of heredity, made of DNA, and carries the information for a specific trait." },
+        { q: "Who is known as the father of genetics?", opts: ["Charles Darwin","Gregor Mendel","Hugo de Vries","Watson and Crick"], ci: 1, exp: "Gregor Johann Mendel, through his experiments on garden pea plants, established the fundamental laws of inheritance." },
+        { q: "In pea plants, tall (T) is dominant over dwarf (t). The genotype of a dwarf plant is:", opts: ["TT","Tt","tt","Tt or TT"], ci: 2, exp: "A dwarf plant must be homozygous recessive (tt) because the dwarf trait is recessive and only expressed in the absence of the dominant allele T." },
+        { q: "The sex chromosomes in human males are:", opts: ["XX","XY","YY","XO"], ci: 1, exp: "Human males have one X and one Y chromosome (XY), while females have two X chromosomes (XX)." },
+        { q: "Homologous organs indicate:", opts: ["Convergent evolution","Divergent evolution","No evolution","Artificial selection"], ci: 1, exp: "Homologous organs share a common ancestral origin but may perform different functions, indicating divergent evolution (e.g., forelimbs of vertebrates)." },
+        { q: "The theory of natural selection was proposed by:", opts: ["Lamarck","Mendel","Darwin","Weismann"], ci: 2, exp: "Charles Darwin proposed the theory of natural selection, explaining how species evolve over generations through the survival of the fittest." },
+        { q: "A Mendelian cross between two heterozygous tall pea plants (Tt × Tt) produces the phenotypic ratio:", opts: ["1:1","3:1","1:2:1","9:3:3:1"], ci: 1, exp: "Tt × Tt gives genotypes TT, Tt, Tt, tt. The phenotype ratio of tall (TT, Tt, Tt) to dwarf (tt) is 3:1." },
+        { q: "Fossils provide evidence for:", opts: ["Only extinction","Evolution","Only adaptation","Migration"], ci: 1, exp: "Fossils are the preserved remains of ancient organisms. They provide crucial evidence for evolution by showing transitional forms and ancestral species." },
+        { q: "The trait that appears in the F₁ generation of a monohybrid cross is:", opts: ["Recessive","Dominant","Codominant","Blended"], ci: 1, exp: "In a monohybrid cross, the dominant trait is expressed in the F₁ generation, while the recessive trait remains masked." },
+        { q: "The wing of a bird and the wing of an insect are examples of:", opts: ["Homologous organs","Analogous organs","Vestigial organs","Rudimentary organs"], ci: 1, exp: "Bird wings and insect wings perform the same function (flight) but have different structural origins, making them analogous organs (convergent evolution)." }
+      ]
+    },
+    ch5: {
+      name: "Chapter 5: Our Environment",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="4"/></svg>`,
+      pool: [
+        { q: "Which of the following is a biodegradable waste?", opts: ["Plastic bottle","Aluminium can","Fruit peel","Glass"], ci: 2, exp: "Fruit peels are organic matter that can be decomposed by microorganisms, making them biodegradable. Plastics, metals, and glass are non-biodegradable." },
+        { q: "The term 'ecosystem' was coined by:", opts: ["Charles Darwin","A.G. Tansley","Ernst Haeckel","Robert Hooke"], ci: 1, exp: "The term 'ecosystem' was coined by British ecologist Arthur George Tansley in 1935." },
+        { q: "In a food chain, the organisms that produce their own food are called:", opts: ["Consumers","Decomposers","Producers","Herbivores"], ci: 2, exp: "Producers (autotrophs), primarily green plants, synthesise their own food through photosynthesis and form the base of every food chain." },
+        { q: "The accumulation of non-biodegradable chemicals at each trophic level is called:", opts: ["Eutrophication","Biomagnification","Bioaccumulation","Biodegradation"], ci: 1, exp: "Biomagnification (biological magnification) is the increasing concentration of toxic substances like pesticides (DDT) at successive trophic levels." },
+        { q: "Ozone depletion is caused by:", opts: ["CO₂","CFCs (chlorofluorocarbons)","SO₂","NO₂"], ci: 1, exp: "Chlorofluorocarbons (CFCs) released from refrigerants and aerosols break down ozone molecules in the stratosphere, causing ozone layer depletion." },
+        { q: "Which of the following is a tertiary consumer?", opts: ["Grass","Rabbit","Snake","Eagle"], ci: 3, exp: "In a food chain: Grass (producer) → Rabbit (primary consumer) → Snake (secondary consumer) → Eagle (tertiary consumer). The eagle occupies the highest trophic level here." },
+        { q: "The energy flow in an ecosystem is:", opts: ["Cyclic","Unidirectional","Bidirectional","Random"], ci: 1, exp: "Energy flow in an ecosystem is unidirectional—from the sun to producers, then to consumers, and finally lost as heat. It does not cycle back." },
+        { q: "Which of the following constitutes a food chain?", opts: ["Grass, wheat, mango","Grass, goat, human","Goat, cow, elephant","Grass, fish, goat"], ci: 1, exp: "A food chain follows the sequence of who eats whom. Grass is eaten by goat (primary consumer), and goat is eaten by human (secondary consumer)." },
+        { q: "The 10% law of energy transfer in a food chain was proposed by:", opts: ["Darwin","Lindeman","Odum","Tansley"], ci: 1, exp: "Raymond Lindeman proposed the 10% law, stating that only about 10% of the energy at one trophic level is transferred to the next level." },
+        { q: "Excessive use of fertilisers leads to:", opts: ["Ozone depletion","Eutrophication","Global warming","Acid rain"], ci: 1, exp: "Fertiliser runoff into water bodies causes eutrophication—excessive nutrient enrichment leading to algal blooms and depletion of dissolved oxygen." }
+      ]
     }
   },
   physics: {
@@ -1036,6 +1161,54 @@ const POOL = {
         { q: "When light travels from air to glass, its speed:", opts: ["Increases","Decreases","Remains the same","Becomes zero"], ci: 1, exp: "Glass is denser than air, so the speed of light decreases upon entering glass." },
         { q: "The phenomenon of splitting of white light into its constituent colours is called:", opts: ["Reflection","Refraction","Dispersion","Scattering"], ci: 2, exp: "Dispersion is the separation of white light into its component colours due to different refractive indices for different wavelengths." },
         { q: "An object placed at 2F of a convex lens forms an image that is:", opts: ["Real, inverted, and same size","Virtual, erect, and magnified","Real, inverted, and diminished","Real, erect, and magnified"], ci: 0, exp: "At 2F, the image is real, inverted, and of the same size as the object." }
+      ]
+    },
+    ch2: {
+      name: "Chapter 2: Human Eye and Colourful World",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="12" rx="8" ry="6"/><circle cx="12" cy="12" r="2"/><path d="M2 12h4M18 12h4"/></svg>`,
+      pool: [
+        { q: "The ability of the eye lens to adjust its focal length is called:", opts: ["Presbyopia","Accommodation","Adaptation","Refraction"], ci: 1, exp: "Accommodation is the ability of the ciliary muscles to change the curvature of the eye lens, allowing us to focus on objects at varying distances." },
+        { q: "Myopia (short-sightedness) can be corrected using:", opts: ["Convex lens","Concave lens","Cylindrical lens","Bifocal lens"], ci: 1, exp: "Myopia is corrected using a concave (diverging) lens, which diverges the incoming light so that the image forms on the retina." },
+        { q: "The scattering of light by colloidal particles is called:", opts: ["Dispersion","Tyndall effect","Refraction","Reflection"], ci: 1, exp: "The Tyndall effect is the scattering of a beam of light by particles in a colloid or fine suspension, making the light path visible." },
+        { q: "Why does the sky appear blue?", opts: ["Reflection","Refraction","Scattering of light","Dispersion"], ci: 2, exp: "The sky appears blue due to Rayleigh scattering. Shorter wavelengths (blue) are scattered more by atmospheric particles than longer wavelengths (red)." },
+        { q: "The near point of a normal human eye is about:", opts: ["25 cm","50 cm","100 cm","Infinity"], ci: 0, exp: "For a young adult with normal vision, the near point (least distance of distinct vision) is approximately 25 cm." },
+        { q: "At sunrise and sunset, the sun appears reddish because:", opts: ["Refraction","Scattering of blue light","Reflection","Dispersion of light"], ci: 1, exp: "At sunrise/sunset, sunlight travels through more atmosphere. Blue light is scattered away, leaving primarily red and orange wavelengths reaching our eyes." },
+        { q: "The splitting of white light into seven colours on passing through a prism is due to:", opts: ["Reflection","Total internal reflection","Dispersion","Interference"], ci: 2, exp: "Dispersion occurs because different colours of light have different speeds in glass, causing different amounts of refraction and separation." },
+        { q: "A person cannot see distant objects clearly. This defect is called:", opts: ["Hypermetropia","Myopia","Presbyopia","Cataract"], ci: 1, exp: "Myopia (nearsightedness) is the inability to see distant objects clearly. The image forms in front of the retina." },
+        { q: "The coloured diaphragm that controls the amount of light entering the eye is the:", opts: ["Cornea","Retina","Iris","Pupil"], ci: 2, exp: "The iris is the coloured part of the eye that regulates the size of the pupil, controlling the amount of light that enters." },
+        { q: "The phenomenon of a rainbow is caused by:", opts: ["Reflection only","Refraction only","Dispersion and total internal reflection","Scattering only"], ci: 2, exp: "Rainbows form due to dispersion of sunlight by water droplets, combined with refraction and total internal reflection within the droplets." }
+      ]
+    },
+    ch3: {
+      name: "Chapter 3: Electricity",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-2 8 10-12h-9l2-8z"/></svg>`,
+      pool: [
+        { q: "The SI unit of electric charge is:", opts: ["Ampere","Volt","Coulomb","Ohm"], ci: 2, exp: "The coulomb (C) is the SI unit of electric charge. One coulomb is the charge transported by a current of 1 ampere in 1 second." },
+        { q: "Ohm's law states that V = IR. If the resistance is doubled, the current:", opts: ["Doubles","Halves","Remains the same","Becomes zero"], ci: 1, exp: "According to Ohm's law, I = V/R. If R is doubled and V is constant, the current becomes half." },
+        { q: "Three resistors of 2 Ω each are connected in series. The equivalent resistance is:", opts: ["2 Ω","4 Ω","6 Ω","8 Ω"], ci: 2, exp: "For resistors in series: Rₑ = R₁ + R₂ + R₃ = 2 + 2 + 2 = 6 Ω." },
+        { q: "The commercial unit of electrical energy is:", opts: ["Joule","Watt","Kilowatt-hour","Volt"], ci: 2, exp: "The kilowatt-hour (kWh) is the commercial unit of electrical energy. 1 kWh = 3.6 × 10⁶ J." },
+        { q: "A fuse wire has:", opts: ["High resistance and high melting point","Low resistance and high melting point","High resistance and low melting point","Low resistance and low melting point"], ci: 2, exp: "A fuse wire has high resistance (to produce heat) and low melting point, so it melts and breaks the circuit when current exceeds safe limits." },
+        { q: "The power rating of an appliance is 100 W, 220 V. The current drawn is approximately:", opts: ["0.45 A","2.2 A","22 A","0.22 A"], ci: 0, exp: "P = VI → I = P/V = 100/220 ≈ 0.45 A." },
+        { q: "Resistivity of a conductor depends on:", opts: ["Length","Area of cross-section","Nature of material","Both length and area"], ci: 2, exp: "Resistivity (ρ) is a material property. It depends on the nature of the material and temperature, not on the dimensions of the conductor." },
+        { q: "When resistors are connected in parallel, the total resistance is:", opts: ["Greater than the largest resistor","Less than the smallest resistor","Equal to the sum","Equal to the average"], ci: 1, exp: "In parallel, the reciprocal of total resistance is the sum of reciprocals. The equivalent resistance is always less than the smallest individual resistor." },
+        { q: "The heating element of an electric heater is made of:", opts: ["Copper","Iron","Nichrome","Aluminium"], ci: 2, exp: "Nichrome (an alloy of nickel and chromium) is used because it has high resistivity and can withstand high temperatures without oxidising." },
+        { q: "Joule's law of heating states that heat produced is proportional to:", opts: ["I²Rt","IR²t","IRt²","I²R²t"], ci: 0, exp: "Joule's law: H = I²Rt, where H is heat produced, I is current, R is resistance, and t is time." }
+      ]
+    },
+    ch4: {
+      name: "Chapter 4: Magnetic Effects of Electric Current",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8v4l-4 4-4-4V4z"/><path d="M8 12h8v4l-4 4-4-4v-4z"/></svg>`,
+      pool: [
+        { q: "Who discovered the magnetic effect of electric current?", opts: ["Michael Faraday","Hans Christian Oersted","James Clerk Maxwell","André-Marie Ampère"], ci: 1, exp: "Hans Christian Oersted discovered in 1820 that an electric current flowing through a wire produces a magnetic field around it." },
+        { q: "The direction of the magnetic field around a straight current-carrying conductor is given by:", opts: ["Fleming's left-hand rule","Right-hand thumb rule","Fleming's right-hand rule","Ampere's rule"], ci: 1, exp: "The right-hand thumb rule: if the thumb points in the direction of current, the curled fingers show the direction of the magnetic field lines." },
+        { q: "An electric motor converts:", opts: ["Electrical energy to chemical energy","Electrical energy to mechanical energy","Mechanical energy to electrical energy","Chemical energy to electrical energy"], ci: 1, exp: "An electric motor converts electrical energy into mechanical energy (rotational motion) using the magnetic effect of current." },
+        { q: "The device used to detect the presence of current in a circuit is:", opts: ["Voltmeter","Ammeter","Galvanometer","Rheostat"], ci: 2, exp: "A galvanometer is a sensitive instrument that detects and indicates the presence and direction of small electric currents." },
+        { q: "Electromagnetic induction was discovered by:", opts: ["Oersted","Faraday","Ampère","Fleming"], ci: 1, exp: "Michael Faraday discovered electromagnetic induction in 1831, demonstrating that a changing magnetic field can induce an electric current." },
+        { q: "Fleming's left-hand rule is used to find the direction of:", opts: ["Induced current","Magnetic field","Force on a current-carrying conductor","Potential difference"], ci: 2, exp: "Fleming's left-hand rule gives the direction of force (motion) on a current-carrying conductor placed in a magnetic field (motor effect)." },
+        { q: "A generator converts:", opts: ["Electrical energy to mechanical energy","Mechanical energy to electrical energy","Light energy to electrical energy","Heat energy to electrical energy"], ci: 1, exp: "An electric generator converts mechanical energy into electrical energy based on the principle of electromagnetic induction." },
+        { q: "The strength of the magnetic field inside a solenoid can be increased by:", opts: ["Decreasing the number of turns","Inserting a soft iron core","Decreasing the current","Using thinner wire"], ci: 1, exp: "Inserting a soft iron core inside a solenoid greatly increases the magnetic field strength because iron has high magnetic permeability." },
+        { q: "Which of the following describes alternating current (AC)?", opts: ["Flows in one direction only","Changes direction periodically","Always constant","Only flows in insulators"], ci: 1, exp: "Alternating current (AC) periodically reverses its direction. In India, the frequency of AC is 50 Hz, meaning it changes direction 100 times per second." },
+        { q: "A fuse is connected in which wire of the domestic circuit?", opts: ["Neutral wire","Earth wire","Live wire","Any wire"], ci: 2, exp: "A fuse is always connected in the live (phase) wire so that when it blows, the appliance is disconnected from the high potential supply." }
       ]
     }
   }
@@ -1065,13 +1238,24 @@ const CHAPTERS = {
     { id: "probability", name: "Probability", pool: "10 questions", level: "RD Sharma Advanced" }
   ],
   chemistry: [
-    { id: "ch1", name: "Chemical Reactions and Equations", pool: "10 questions", level: "NCERT Based" }
+    { id: "ch1", name: "Chemical Reactions and Equations", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch2", name: "Acids, Bases and Salts", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch3", name: "Metals and Non-metals", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch4", name: "Carbon and its Compounds", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch5", name: "Periodic Classification of Elements", pool: "10 questions", level: "NCERT Based" }
   ],
   biology: [
-    { id: "ch1", name: "Life Processes", pool: "10 questions", level: "NCERT Based" }
+    { id: "ch1", name: "Life Processes", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch2", name: "Control and Coordination", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch3", name: "How do Organisms Reproduce?", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch4", name: "Heredity and Evolution", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch5", name: "Our Environment", pool: "10 questions", level: "NCERT Based" }
   ],
   physics: [
-    { id: "ch1", name: "Light – Reflection and Refraction", pool: "10 questions", level: "NCERT Based" }
+    { id: "ch1", name: "Light – Reflection and Refraction", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch2", name: "Human Eye and Colourful World", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch3", name: "Electricity", pool: "10 questions", level: "NCERT Based" },
+    { id: "ch4", name: "Magnetic Effects of Electric Current", pool: "10 questions", level: "NCERT Based" }
   ]
 };
 
@@ -1227,11 +1411,9 @@ function goTo(screen) {
 
 function selectSubject(sub) {
   ST.subjectId = sub.id;
-  // Update tags
   chapterSubjectTag.textContent = sub.tag || sub.name;
   countSubjectTag.textContent   = sub.tag || sub.name;
   quizSubjectTag.textContent    = sub.tag || sub.name;
-  // Reset chapter and build chapter list
   ST.chapterId = null;
   buildChapterList(sub.id);
   goTo(screenChapter);
@@ -1246,7 +1428,6 @@ function buildChapterList(subjectId) {
   chapters.forEach(ch => {
     const card = document.createElement('button');
     card.className = 'card-item';
-    // Use subject-specific icon from POOL
     const icon = POOL[subjectId]?.[ch.id]?.icon || '';
     card.innerHTML = `
       <div class="c-icon">${icon}</div>
@@ -1263,13 +1444,11 @@ function buildChapterList(subjectId) {
     chapterListEl.appendChild(card);
   });
 
-  // Set subtitle for subjects
   if (subjectId === 'maths') {
     chapterSubtitle.textContent = "Each Questions are From Rd Sharma , Ncert and RS Agrawal";
   } else {
     chapterSubtitle.textContent = "Each question is carefully picked from NCERT & standard reference books";
   }
-  // Update step label
   chapterStepLabel.textContent = 'Step 2 of 3';
 }
 
@@ -1297,7 +1476,6 @@ function pickChapter(id) {
   const ch = POOL[ST.subjectId][ST.chapterId];
   selectedChName.textContent = ch.name;
   clearCountPicker();
-  // Update count step label
   countStepLabel.textContent = 'Step 3 of 3';
   goTo(screenCount);
 }
@@ -1484,7 +1662,7 @@ btnRetry.addEventListener('click', () => {
 });
 
 btnChange.addEventListener('click', () => {
-  resetAll(true); // keep subject
+  resetAll(true);
   clearCountPicker();
   progFill.style.width = '0%';
   progTicks.innerHTML = '';
@@ -1506,4 +1684,5 @@ function typeset(nodes) {
 })();
 </script>
 </body>
-</html>    
+</html>
+  
