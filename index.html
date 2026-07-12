@@ -563,13 +563,15 @@ footer{
   <div class="landing-badge">Class 10th &middot; Multi‑Subject Practice</div>
   <div class="landing-icon">&Sigma;</div>
   <h1 class="landing-title">Hemang<br>Welcomes You</h1>
-  <p class="landing-sub">Maths &bull; Chemistry &bull; Biology &bull; Physics</p>
+  <p class="landing-sub">Maths &bull; Chemistry &bull; Biology &bull; Physics &bull; Geography &bull; History &bull; Civics &bull; Economics</p>
   <div class="landing-chips">
     <span class="chip">Real Numbers</span>
-    <span class="chip">Polynomials</span>
     <span class="chip">Chemical Reactions</span>
     <span class="chip">Life Processes</span>
-    <span class="chip">Light</span>
+    <span class="chip">Resources</span>
+    <span class="chip">Nationalism</span>
+    <span class="chip">Power Sharing</span>
+    <span class="chip">Development</span>
   </div>
   <button class="cta-btn" id="btnStart">
     Start Practice
@@ -589,7 +591,7 @@ footer{
         <div class="s">Developer &middot; HEMANG</div>
       </div>
     </div>
-    <div class="nav-tag">Science</div>
+    <div class="nav-tag">All Subjects</div>
   </div>
 
   <button class="back-btn" id="btnBackToLandingFromSubject">
@@ -724,7 +726,7 @@ footer{
     </div>
 
     <div class="q-card" id="qCard">
-      <div class="q-meta"><span class="q-dot"></span> &middot; Advanced Level</div>
+      <div class="q-meta"><span class="q-dot"></span>NCERT Based &middot; Standard Level</div>
       <div class="q-text" id="qText"></div>
       <div class="options" id="optList"></div>
 
@@ -1211,6 +1213,78 @@ const POOL = {
         { q: "A fuse is connected in which wire of the domestic circuit?", opts: ["Neutral wire","Earth wire","Live wire","Any wire"], ci: 2, exp: "A fuse is always connected in the live (phase) wire so that when it blows, the appliance is disconnected from the high potential supply." }
       ]
     }
+  },
+  geography: {
+    ch1: {
+      name: "Chapter 1: Resources and Development",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a10 10 0 0 1 0 20"/><path d="M12 2a10 10 0 0 0 0 20"/></svg>`,
+      pool: [
+        { q: "Which of the following is a renewable resource?", opts: ["Coal","Petroleum","Solar energy","Natural gas"], ci: 2, exp: "Solar energy is a renewable resource because it is continuously replenished by the sun and will not be exhausted with use, unlike fossil fuels such as coal, petroleum, and natural gas." },
+        { q: "The Rio de Janeiro Earth Summit was held in which year?", opts: ["1990","1991","1992","1993"], ci: 2, exp: "The United Nations Conference on Environment and Development (UNCED), also known as the Earth Summit, was held in Rio de Janeiro, Brazil, in June 1992." },
+        { q: "Which soil is known as regur soil?", opts: ["Alluvial soil","Black soil","Red soil","Laterite soil"], ci: 1, exp: "Black soil is also called regur soil. It is formed from weathered lava rocks and is ideal for cotton cultivation, hence also called black cotton soil." },
+        { q: "Land left uncultivated for more than 5 agricultural years is called:", opts: ["Fallow land","Culturable waste land","Barren and wasteland","Net sown area"], ci: 1, exp: "Culturable waste land refers to land that is left uncultivated for more than 5 agricultural years. It can be reclaimed for cultivation with proper efforts." },
+        { q: "Which of the following is a consequence of indiscriminate use of resources?", opts: ["Sustainable development","Resource conservation","Environmental degradation","Equitable distribution"], ci: 2, exp: "Indiscriminate use of resources leads to environmental degradation, including depletion of resources, pollution, and ecological imbalance." },
+        { q: "The Agenda 21 was adopted at which conference?", opts: ["Montreal Protocol","Kyoto Protocol","Earth Summit 1992","Copenhagen Summit"], ci: 2, exp: "Agenda 21 is a comprehensive action plan for sustainable development adopted by over 170 nations at the Rio de Janeiro Earth Summit in 1992." },
+        { q: "Which type of soil is found in the Deccan plateau region?", opts: ["Alluvial soil","Black soil","Red and yellow soil","Mountain soil"], ci: 1, exp: "Black soil (regur) is predominantly found in the Deccan plateau region, covering parts of Maharashtra, Madhya Pradesh, Gujarat, Andhra Pradesh, and Karnataka." },
+        { q: "The concept of sustainable development was popularised by:", opts: ["Agenda 21","Brundtland Commission Report","Rio Declaration","Montreal Protocol"], ci: 1, exp: "The Brundtland Commission Report (1987), titled 'Our Common Future', popularised the concept of sustainable development as development that meets the needs of the present without compromising the ability of future generations." },
+        { q: "Gullied land caused by running water is called:", opts: ["Bad land","Sheet erosion","Contour ploughing","Terrace farming"], ci: 0, exp: "Bad land is land that is deeply eroded by running water forming gullies and ravines, making it unsuitable for cultivation. It is commonly found in the Chambal valley." },
+        { q: "Resource planning involves:", opts: ["Only identification","Identification, inventory, and planning","Only exploitation","Only conservation"], ci: 1, exp: "Resource planning is a systematic process involving three stages: identification and inventory of resources, planning with appropriate technology and skill sets, and matching the resource plans with overall national development plans." }
+      ]
+    }
+  },
+  history: {
+    ch1: {
+      name: "Chapter 1: The Rise of Nationalism in Europe",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>`,
+      pool: [
+        { q: "The first clear expression of nationalism came with the:", opts: ["American Revolution","French Revolution","Russian Revolution","Industrial Revolution"], ci: 1, exp: "The French Revolution of 1789 was the first clear expression of nationalism. It promoted the ideas of la patrie (the fatherland) and le citoyen (the citizen), establishing the notion of a nation-state." },
+        { q: "Who unified Italy through a series of wars and diplomatic efforts?", opts: ["Giuseppe Mazzini","Count Camillo de Cavour","Giuseppe Garibaldi","Victor Emmanuel II"], ci: 1, exp: "Count Camillo de Cavour, the Chief Minister of Sardinia-Piedmont, unified Italy through a combination of diplomatic alliances (with France), wars against Austria, and political manoeuvring." },
+        { q: "The Treaty of Vienna (1815) was signed after the defeat of:", opts: ["Napoleon","Hitler","Kaiser Wilhelm II","Louis XVI"], ci: 0, exp: "The Treaty of Vienna was signed in 1815 after the defeat of Napoleon Bonaparte. It was hosted by the Austrian Chancellor, Duke Metternich, to restore the pre-Napoleonic monarchical order in Europe." },
+        { q: "Who was the founder of 'Young Italy' and 'Young Europe'?", opts: ["Cavour","Mazzini","Garibaldi","Metternich"], ci: 1, exp: "Giuseppe Mazzini founded the secret societies 'Young Italy' (1831) in Marseilles and 'Young Europe' (1834) in Berne to promote the ideas of liberty, equality, and national unification." },
+        { q: "Which region was known as the 'Balkan powder keg'?", opts: ["The Balkans","Scandinavia","Iberian Peninsula","The Rhineland"], ci: 0, exp: "The Balkans region in southeastern Europe was called the 'powder keg of Europe' because of the intense nationalist conflicts, ethnic tensions, and great power rivalries that eventually triggered World War I." },
+        { q: "The Frankfurt Parliament of 1848 was convened in:", opts: ["St. Paul's Church","Palace of Versailles","Westminster Abbey","St. Peter's Basilica"], ci: 0, exp: "The Frankfurt Parliament, an all-German National Assembly, was convened on 18 May 1848 in St. Paul's Church in Frankfurt to draft a constitution for a unified German nation." },
+        { q: "Otto von Bismarck is associated with the unification of:", opts: ["Italy","Germany","France","Britain"], ci: 1, exp: "Otto von Bismarck, the Prussian Chancellor, unified Germany through a policy of 'blood and iron' involving three wars: against Denmark (1864), Austria (1866), and France (1870-71)." },
+        { q: "The Habsburg Empire was a patchwork of many different:", opts: ["Only Germans","Only Italians","Regions and peoples","Only French-speaking regions"], ci: 2, exp: "The Habsburg Empire was a multi-ethnic empire comprising Germans, Hungarians, Czechs, Slovaks, Poles, Romanians, Croats, Italians, and other ethnic groups spread across central and eastern Europe." },
+        { q: "The idea that the Balkan peoples could win their independence with Russian support was called:", opts: ["Pan-Slavism","Pan-Germanism","Pan-Hellenism","Pan-Islamism"], ci: 0, exp: "Pan-Slavism was the idea that all Slavic peoples of the Balkans should unite and could win their independence with the support of Russia, a major Slavic power." },
+        { q: "The Napoleonic Code of 1804 established:", opts: ["Monarchy and feudal privileges","Equality before law and right to property","Theocracy and divine rule","Colonial expansion and slavery"], ci: 1, exp: "The Napoleonic Code (Civil Code of 1804) established equality before the law, abolished privileges based on birth, and secured the right to property. It was exported to regions under French control across Europe." }
+      ]
+    }
+  },
+  civics: {
+    ch1: {
+      name: "Chapter 1: Power Sharing",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+      pool: [
+        { q: "Power sharing is desirable because it:", opts: ["Increases conflict","Reduces the possibility of conflict","Creates more problems","Weakens the country"], ci: 1, exp: "Power sharing reduces the possibility of conflict between different social groups. It ensures that no single group can dominate others, thereby promoting stability and harmony in a diverse society." },
+        { q: "Which of the following is an example of horizontal power sharing?", opts: ["Central and state governments","Legislature, executive, and judiciary","Local self-governments","Panchayati Raj institutions"], ci: 1, exp: "Horizontal power sharing refers to the distribution of power among different organs of government at the same level, i.e., the legislature, executive, and judiciary, each checking and balancing the others." },
+        { q: "The Belgian model of power sharing is an example of:", opts: ["Majoritarianism","Accommodation","Authoritarianism","Unitarianism"], ci: 1, exp: "The Belgian model is an excellent example of accommodation in a multilingual, multi-ethnic society. It involved equal representation for Dutch and French-speaking communities and community government for cultural matters." },
+        { q: "In India, the system of Panchayati Raj is an example of:", opts: ["Horizontal power sharing","Vertical power sharing","Community government","Federal division only"], ci: 1, exp: "Panchayati Raj represents vertical power sharing where power is shared among different levels of government: central, state, and local (Panchayati Raj institutions at the village, block, and district levels)." },
+        { q: "The majority community in Sri Lanka that followed majoritarianism was:", opts: ["Tamils","Muslims","Sinhalese","Christians"], ci: 2, exp: "The Sinhalese community constituted about 74% of Sri Lanka's population. The post-independence government followed majoritarian policies favouring Sinhalese interests, which led to widespread conflict with the Tamil minority." },
+        { q: "Which form of power sharing involves political parties, pressure groups, and social movements?", opts: ["Horizontal","Vertical","Among different social groups","Among political parties and movements"], ci: 3, exp: "Power sharing among political parties, pressure groups, and social movements ensures that different ideologies and interests compete for power and influence, providing citizens with choices in a democracy." },
+        { q: "The principle of 'checks and balances' is associated with:", opts: ["Federal division of powers","Separation of powers among organs","Community government","Coalition government"], ci: 1, exp: "The principle of checks and balances ensures that each organ of government (legislature, executive, and judiciary) has the power to check and limit the actions of the other organs, preventing any one organ from becoming too powerful." },
+        { q: "Brussels, the capital of Belgium, has a separate government in which:", opts: ["Only Dutch speakers have representation","Only French speakers have representation","Both communities have equal representation","There is no representation"], ci: 2, exp: "In Brussels, the capital of Belgium, the Dutch and French-speaking communities have equal representation in the government. This arrangement acknowledges the city's bilingual character and prevents domination by either community." },
+        { q: "The civil war in Sri Lanka was a result of:", opts: ["Power sharing arrangements","Majoritarian policies","Federal structure","Equal language rights"], ci: 1, exp: "The Sri Lankan civil war erupted because of majoritarian policies adopted by the Sinhalese-dominated government, including making Sinhala the official language and disregarding Tamil interests, which alienated the Tamil minority." },
+        { q: "Which of the following statements best describes the need for power sharing in a democracy?", opts: ["It is only needed in large countries","It is the very spirit of democracy","It weakens the government","It creates instability"], ci: 1, exp: "Power sharing is the very spirit of democracy. Democratic rule involves sharing power with those affected by its exercise and who have to live with its effects. It ensures legitimate governance and respects diversity." }
+      ]
+    }
+  },
+  economics: {
+    ch1: {
+      name: "Chapter 1: Development",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>`,
+      pool: [
+        { q: "Which of the following is considered the most appropriate measure of development?", opts: ["Per capita income","Literacy rate","Human Development Index (HDI)","Infant mortality rate"], ci: 2, exp: "The Human Development Index (HDI) is considered the most comprehensive measure of development as it combines indicators of health (life expectancy), education (literacy rate), and standard of living (per capita income)." },
+        { q: "The criterion used by the World Bank to classify countries is:", opts: ["Literacy rate","Per capita income","Life expectancy","Net attendance ratio"], ci: 1, exp: "The World Bank uses per capita income as the primary criterion to classify countries into high-income, middle-income, and low-income countries. Countries with per capita income above a certain threshold are considered developed." },
+        { q: "Which Indian state has the lowest infant mortality rate (IMR) according to general trends?", opts: ["Bihar","Uttar Pradesh","Kerala","Madhya Pradesh"], ci: 2, exp: "Kerala consistently has the lowest infant mortality rate in India due to its well-developed healthcare infrastructure, high literacy rate, and effective public health policies." },
+        { q: "The concept of sustainable development focuses on:", opts: ["Only economic growth","Only environmental protection","Meeting present needs without compromising future generations","Only social equality"], ci: 2, exp: "Sustainable development is development that meets the needs of the present without compromising the ability of future generations to meet their own needs, balancing economic, social, and environmental dimensions." },
+        { q: "The Net Attendance Ratio at the secondary level in India is:", opts: ["About 90%","About 75%","About 50%","About 30%"], ci: 2, exp: "The Net Attendance Ratio (NAR) at the secondary level in India is approximately 50%, meaning about half of the children in the relevant age group attend secondary school." },
+        { q: "Which of the following is NOT a component of HDI?", opts: ["Life expectancy at birth","Mean years of schooling","Gross National Income per capita","Foreign exchange reserves"], ci: 3, exp: "Foreign exchange reserves are not a component of the Human Development Index. HDI comprises life expectancy at birth (health), mean years of schooling and expected years of schooling (education), and Gross National Income per capita (standard of living)." },
+        { q: "The average income is also called:", opts: ["Total income","Per capita income","National income","Gross Domestic Product"], ci: 1, exp: "Per capita income (average income) is calculated by dividing the total national income of a country by its total population. It gives an average measure of the income earned per person in a given year." },
+        { q: "If the per capita income of a country is increasing but the gap between rich and poor is widening, the development is:", opts: ["Sustainable","Equitable","Unequal and non-inclusive","Balanced"], ci: 2, exp: "When per capita income increases but the gap between rich and poor widens, it indicates unequal and non-inclusive development, where the benefits of economic growth are not shared equitably across all sections of society." },
+        { q: "Body Mass Index (BMI) is an indicator of:", opts: ["Educational status","Nutritional status","Income level","Employment status"], ci: 1, exp: "Body Mass Index (BMI) is calculated as weight (kg) divided by height squared (m²). It is a widely used indicator of nutritional status and helps assess whether an individual is undernourished or overweight." },
+        { q: "Which of the following best defines 'development'?", opts: ["Only increase in GDP","Only building infrastructure","A mix of economic prosperity, better health, education, and equality","Only increase in per capita income"], ci: 2, exp: "Development is a multidimensional concept that goes beyond mere economic growth. It encompasses economic prosperity, better health and education facilities, reduction in poverty and inequality, and overall improvement in the quality of life." }
+      ]
+    }
   }
 };
 
@@ -1221,7 +1295,11 @@ const SUBJECTS = [
   { id: "maths", name: "Mathematics", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 17h16M7 4v16M17 4v16"/></svg>`, tag: "Math" },
   { id: "chemistry", name: "Chemistry", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2l2 4 4-2-2 4 4 2-4 2 2 4-4-2-2 4-2-4-4 2 2-4-4-2 4-2-2-4 4 2 2-4z"/></svg>`, tag: "Chem" },
   { id: "biology", name: "Biology", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18V12m0-10v10"/></svg>`, tag: "Bio" },
-  { id: "physics", name: "Physics", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`, tag: "Physics" }
+  { id: "physics", name: "Physics", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`, tag: "Physics" },
+  { id: "geography", name: "Geography", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a10 10 0 0 1 0 20"/></svg>`, tag: "Geo" },
+  { id: "history", name: "History", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>`, tag: "Hist" },
+  { id: "civics", name: "Civics", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`, tag: "Civics" },
+  { id: "economics", name: "Economics", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>`, tag: "Econ" }
 ];
 
 const CHAPTERS = {
@@ -1256,6 +1334,18 @@ const CHAPTERS = {
     { id: "ch2", name: "Human Eye and Colourful World", pool: "10 questions", level: "NCERT Based" },
     { id: "ch3", name: "Electricity", pool: "10 questions", level: "NCERT Based" },
     { id: "ch4", name: "Magnetic Effects of Electric Current", pool: "10 questions", level: "NCERT Based" }
+  ],
+  geography: [
+    { id: "ch1", name: "Resources and Development", pool: "10 questions", level: "NCERT Based" }
+  ],
+  history: [
+    { id: "ch1", name: "The Rise of Nationalism in Europe", pool: "10 questions", level: "NCERT Based" }
+  ],
+  civics: [
+    { id: "ch1", name: "Power Sharing", pool: "10 questions", level: "NCERT Based" }
+  ],
+  economics: [
+    { id: "ch1", name: "Development", pool: "10 questions", level: "NCERT Based" }
   ]
 };
 
@@ -1685,4 +1775,3 @@ function typeset(nodes) {
 </script>
 </body>
 </html>
-  
